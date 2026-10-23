@@ -1,0 +1,1389 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cheickné Kagnassi</title>
+<meta name="description" content="Portfolio de projets de Cheickné Kagnassi, élève-ingénieur ESEO en recherche d'alternance en cybersécurité.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cheickné Kagnassi · portfolio">
+<meta property="og:description" content="Élève-ingénieur ESEO, recherche une alternance en cybersécurité à partir de septembre 2027. Projets : réseau sécurisé pfSense et Suricata, stage de machine learning embarqué à la KU Leuven, station SafeRoom sur STM32.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Black on white, like an architecture sheet: hairlines, a drawing grid, a title block under each drawing.
+   One theme on purpose (black on white), every colour set explicitly. */
+:root {
+  --paper: #ffffff;
+  --ink: #111111;
+  --muted: #666666;
+  --line: #d2d2d2;
+  --hair: #ececec;
+  --soft: #f5f5f5;
+  --sel: #e9e9e9;
+  --font-sans: "Jost", "Futura", "Century Gothic", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1040px; margin: 0 auto; }
+a { color: var(--ink); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible, button:focus-visible, .part:focus-visible, .spot:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+h1, h2, h3, h4 { font-family: var(--font-sans); text-wrap: balance; margin: 0; line-height: 1.1; }
+
+/* top bar */
+.top { display: flex; flex-wrap: wrap; gap: 8px 28px; justify-content: space-between; align-items: center; padding-block: 22px; border-bottom: 1px solid var(--ink); }
+.top .mark { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.08em; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
+.top nav a { text-decoration: none; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.top nav a:hover { text-decoration: underline; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: 48px; align-items: start; padding-block: 56px 36px; }
+.eyebrow { font-family: var(--font-mono); font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.hero h1 { font-weight: 300; font-size: clamp(2.5rem, 7.4vw, 4.9rem); text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.98; margin-block: 14px 22px; }
+.lead { font-size: 1.22rem; font-weight: 400; max-width: 36em; margin: 0; }
+.photo { display: block; width: 210px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 1px solid var(--ink); }
+.photo img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.06); filter: grayscale(1) contrast(1.04); }
+.specs { margin: 30px 0 0; padding: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); border-top: 1px solid var(--ink); max-width: 640px; }
+.specs dt, .specs dd { margin: 0; padding: 9px 0; border-bottom: 1px solid var(--line); }
+.specs dt { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; padding-right: 26px; }
+.specs dd { min-width: 0; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.mail span { font-family: var(--font-mono); font-size: 0.9rem; user-select: all; overflow-wrap: anywhere; }
+.btn { font: 500 0.74rem var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); background: var(--paper); cursor: pointer; border: 1px solid var(--ink); border-radius: 0; padding: 5px 11px; }
+.btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+.btn:disabled { opacity: 0.3; cursor: default; }
+
+/* three domains */
+.domains { list-style: none; margin: 0 0 8px; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+.domains li { display: grid; gap: 6px; align-content: start; min-width: 0; padding: 16px 20px 18px; border-left: 1px solid var(--line); }
+.domains li:first-child { border-left: 0; padding-left: 0; }
+.domains .k { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+.domains p { margin: 0; font-size: 1rem; }
+.domains a { font-family: var(--font-mono); font-size: 0.78rem; }
+
+/* sections */
+section { padding-block: 48px; }
+.sec-head { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 18px; border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin-bottom: 18px; }
+.sec-head .no { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+.sec-head h2 { font-weight: 400; font-size: 1.9rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.sec-intro { color: var(--muted); margin: 0 0 30px; max-width: 62ch; }
+
+/* project case */
+.case { padding-block: 30px 40px; border-top: 1px solid var(--line); }
+.case:first-of-type { border-top: 0; padding-top: 6px; }
+.case-head { display: grid; gap: 6px; margin-bottom: 20px; }
+.where { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.case-head h3 { font-size: 2.05rem; font-weight: 500; }
+.case-head p { margin: 0; max-width: 62ch; }
+
+/* drawing sheet */
+.board { margin: 0 0 26px; border: 1px solid var(--ink); padding: 14px 18px 16px; display: grid; gap: 14px; background: var(--paper); }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; }
+.cap { margin: 0; flex: 1 1 280px; min-width: 0; font-weight: 500; }
+.ctrl { display: flex; flex-wrap: wrap; gap: 6px; }
+.board .scroll {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding-block: 10px;
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--hair) 1px, transparent 1px), linear-gradient(90deg, var(--hair) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.board .scroll svg { display: block; width: 100%; min-width: 720px; height: auto; }
+.lower { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px 26px; align-items: start; }
+.detail { border-left: 2px solid var(--ink); padding: 2px 0 2px 14px; display: grid; gap: 4px; min-height: 92px; align-content: start; min-width: 0; }
+.detail .dk { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.detail h4 { font-size: 1.45rem; font-weight: 500; }
+.detail p { margin: 0; font-size: 0.97rem; }
+.detail .face-note { margin-top: 8px; font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; align-content: start; }
+.chips .lbl { width: 100%; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.chip { font: 400 0.76rem var(--font-mono); color: var(--ink); background: var(--paper); border: 1px solid var(--line); border-radius: 0; padding: 3px 9px; cursor: pointer; }
+.chip:hover { border-color: var(--ink); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.chip.off { opacity: 0.4; }
+.foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; }
+.legend { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted); margin: 0; max-width: 46ch; }
+.cartouche { display: grid; grid-template-columns: auto minmax(0, auto); margin: 0; border: 1px solid var(--ink); font-family: var(--font-mono); font-size: 0.72rem; min-width: 0; }
+.cartouche dt, .cartouche dd { margin: 0; padding: 4px 10px; border-bottom: 1px solid var(--line); }
+.cartouche dt { color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; border-right: 1px solid var(--line); }
+.cartouche dd { font-variant-numeric: tabular-nums; min-width: 0; }
+.cartouche dt:last-of-type, .cartouche dd:last-of-type { border-bottom: 0; }
+
+/* component viewer: the card turns over */
+.viewer { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 16px 26px; align-items: start; }
+.stage-wrap { display: grid; gap: 8px; min-width: 0; }
+.stage { position: relative; aspect-ratio: 4 / 3; max-width: 100%; border: 1px solid var(--line); background: var(--paper); perspective: 1400px; cursor: pointer; }
+.card { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(0.3, 0.7, 0.2, 1); }
+.card.turned { transform: rotateY(180deg); }
+.card.instant { transition: none; }
+.face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; background: var(--paper); }
+.face.back { transform: rotateY(180deg); }
+.face.inactive { pointer-events: none; }
+.face svg { position: absolute; left: 12px; top: 28px; width: calc(100% - 24px); height: calc(100% - 40px); display: block; }
+.face .side { position: absolute; left: 10px; top: 7px; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; color: var(--muted); }
+.vctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
+.vctrl .hint { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.spot { cursor: pointer; outline: none; }
+.spot circle { fill: var(--ink); stroke: var(--paper); stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.spot text { fill: var(--paper); font-family: var(--font-mono); font-weight: 500; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.spot:hover circle, .spot.on circle { fill: var(--paper); stroke: var(--ink); stroke-width: 2.5px; }
+.spot:hover text, .spot.on text { fill: var(--ink); }
+.spot:focus-visible circle { stroke: var(--ink); stroke-width: 3px; }
+.spots { list-style: none; margin: 6px 0 0; padding: 0; display: grid; }
+.spot-item { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; text-align: left; width: 100%; background: none; border: 0; border-top: 1px solid var(--hair); padding: 7px 4px; font: inherit; font-size: 0.93rem; line-height: 1.45; color: var(--ink); cursor: pointer; }
+.spot-item:hover { background: var(--soft); }
+.spot-item .num { width: 20px; height: 20px; border-radius: 50%; background: var(--ink); color: var(--paper); font: 500 0.7rem var(--font-mono); display: grid; place-items: center; margin-top: 1px; }
+.spot-item[aria-pressed="true"] { background: var(--sel); }
+.spot-item[aria-pressed="true"] .num { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
+
+/* what I did */
+.cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 0.9fr); gap: 30px; }
+.cols h4 { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.cols p { margin: 0; }
+.cols ul { margin: 0; padding-left: 1.2em; list-style-type: "– "; }
+.cols li { margin-bottom: 5px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 !important; margin: 0; list-style: none !important; }
+.tags li { font-family: var(--font-mono); font-size: 0.74rem; border: 1px solid var(--line); padding: 2px 8px; margin: 0; }
+
+/* schematic drawing */
+.n { fill: var(--paper); stroke: var(--ink); stroke-width: 1.2; }
+.n.mine { stroke-width: 2.6; }
+.n2 { fill: none; stroke: var(--ink); stroke-width: 0.8; }
+.n.threat, .n.next { stroke-dasharray: 6 4; }
+.slot { fill: var(--paper); stroke: var(--line); stroke-width: 1; }
+.hatch { fill: url(#hatch); stroke: var(--ink); stroke-width: 1.2; }
+.band { fill: var(--soft); stroke: var(--ink); stroke-width: 1; }
+.t { fill: var(--ink); font: 500 14px var(--font-sans); }
+.s { fill: var(--muted); font: 400 12.5px var(--font-sans); }
+.m { fill: var(--muted); font: 400 11px var(--font-mono); }
+.g { fill: var(--muted); font: 500 10.5px var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
+.if { fill: var(--ink); font: 500 11px var(--font-mono); }
+.wire { stroke: var(--ink); stroke-width: 1.3; fill: none; }
+.wire.radio { stroke-dasharray: 2 4; }
+.br { stroke: var(--muted); stroke-width: 1; fill: none; }
+.encl { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 9 5; pointer-events: stroke; }
+.encl-l { fill: var(--ink); font: 500 10.5px var(--font-mono); letter-spacing: 0.08em; }
+.pin { fill: var(--ink); }
+.part { cursor: pointer; outline: none; }
+.part:hover .n, .part:hover .slot, .part:hover .band, .part:hover .hatch { stroke: var(--ink); stroke-width: 2.2; }
+.part:hover .encl { stroke-width: 2.2; }
+.part:focus-visible .n, .part:focus-visible .slot, .part:focus-visible .band, .part:focus-visible .encl { stroke: var(--ink); stroke-width: 3; }
+.part.sel .n, .part.sel .slot, .part.sel .band { fill: var(--sel); stroke: var(--ink); stroke-width: 2.4; }
+.part.sel .hatch, .part.sel .encl { stroke-width: 2.4; }
+.fresh .n, .fresh .slot { stroke: var(--ink); stroke-width: 2.4; }
+.ghost { opacity: 0.1; pointer-events: none; }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll [data-step] { transition: opacity 0.35s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
+}
+
+/* other projects */
+.others { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.others li { display: grid; grid-template-columns: 210px minmax(0, 1fr) minmax(0, 0.8fr); gap: 8px 26px; padding-block: 16px; border-bottom: 1px solid var(--line); align-items: start; }
+.others h3 { font-size: 1.3rem; font-weight: 500; margin-bottom: 4px; }
+.others p { margin: 0; font-size: 0.97rem; }
+
+/* skills matrix */
+.matrix-wrap { overflow-x: auto; position: relative; }
+.matrix { border-collapse: collapse; width: 100%; min-width: 640px; }
+.matrix th, .matrix td { padding: 9px 10px; border-bottom: 1px solid var(--line); text-align: center; }
+.matrix thead th { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; vertical-align: bottom; border-bottom: 1px solid var(--ink); }
+.matrix tbody th { text-align: left; font-weight: 400; }
+.matrix .grp th { text-align: left; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; color: var(--ink); text-transform: uppercase; letter-spacing: 0.1em; padding-top: 24px; border-bottom: 1px solid var(--ink); }
+.dot { display: inline-block; width: 10px; height: 10px; background: var(--ink); vertical-align: middle; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.more { display: grid; grid-template-columns: max-content minmax(0, 1fr); margin: 32px 0 0; border-top: 1px solid var(--ink); }
+.more dt, .more dd { margin: 0; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.more dt { font-weight: 500; padding-right: 30px; }
+.more dd { min-width: 0; }
+
+/* path */
+.path { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 44px; }
+.path h3 { font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.path .side-col { display: grid; gap: 34px; align-content: start; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.steps li { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 2px 18px; }
+.steps .when { font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 3px; }
+.steps .body { display: grid; gap: 1px; min-width: 0; }
+.steps .what { font-weight: 500; }
+.steps .at { color: var(--muted); font-size: 0.95rem; }
+.path p { margin: 0; }
+
+/* contact */
+.contact { border: 1px solid var(--ink); padding: 28px; display: grid; gap: 14px; }
+.contact p { margin: 0; max-width: 56ch; font-size: 1.12rem; }
+footer { padding-block: 26px 40px; color: var(--muted); font-family: var(--font-mono); font-size: 0.74rem; border-top: 1px solid var(--ink); display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; }
+
+@media (max-width: 860px) {
+  .cols, .lower, .viewer { grid-template-columns: 1fr; gap: 18px; }
+  .domains { grid-template-columns: 1fr; }
+  .domains li { border-left: 0; padding-left: 0; border-top: 1px solid var(--line); }
+  .domains li:first-child { border-top: 0; }
+  .others li { grid-template-columns: 1fr; gap: 6px; }
+}
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; gap: 24px; padding-block: 34px 24px; }
+  .photo { width: 140px; order: -1; }
+  .path { grid-template-columns: 1fr; gap: 32px; }
+  .steps li { grid-template-columns: 1fr; }
+  .specs, .more { grid-template-columns: 1fr; }
+  .specs dt, .more dt { border-bottom: 0; padding-bottom: 0; }
+  .specs dd, .more dd { padding-top: 4px; }
+  .foot { flex-direction: column; align-items: stretch; }
+}
+</style>
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<!-- Drawing library: hatchings, pins and the line drawings of the components (front "-f" and back "-b") -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;overflow:hidden">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#111"/></marker>
+    <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fff"/><path d="M0 0 V6" stroke="#111" stroke-width="1"/></pattern>
+    <pattern id="pin-m" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect x="1.5" y="1.5" width="7" height="7" fill="#fff" stroke="#111" stroke-width=".8"/><rect x="3.75" y="3.75" width="2.5" height="2.5" fill="#111"/></pattern>
+    <pattern id="pin-f" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect x="3" y="3" width="4" height="4" fill="#111"/></pattern>
+    <pattern id="pad" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><circle cx="5" cy="5" r="3.4" fill="#fff" stroke="#111" stroke-width=".8"/><circle cx="5" cy="5" r="1.3" fill="#111"/></pattern>
+    <pattern id="grille" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#fff"/><rect x="2" y="2" width="6" height="5" rx=".6" fill="#111"/></pattern>
+    <pattern id="mesh" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#fff"/><path d="M0 0 L5 5 M5 0 L0 5" stroke="#111" stroke-width=".5"/></pattern>
+  </defs>
+
+  <!-- STM32 Nucleo, front: ST-LINK part on the left, STM32 turned 45° in the middle -->
+  <symbol id="nucleo-f" viewBox="0 0 400 220">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="2" width="396" height="216" rx="8"/>
+      <path d="M122 4 V216" fill="none" stroke-dasharray="3 4" stroke-width="1"/>
+      <circle cx="16" cy="16" r="5"/><circle cx="16" cy="204" r="5"/><circle cx="384" cy="16" r="5"/><circle cx="384" cy="204" r="5"/>
+      <rect x="0" y="88" width="26" height="44" rx="2"/>
+      <rect x="6" y="99" width="12" height="22" fill="#111" stroke="none"/>
+      <rect x="54" y="86" width="44" height="44" rx="2"/>
+      <circle cx="61" cy="93" r="2" fill="#111" stroke="none"/>
+      <rect x="50" y="30" width="20" height="20" fill="url(#pin-m)"/>
+      <rect x="94" y="166" width="10" height="6"/>
+      <rect x="140" y="10" width="240" height="20" fill="url(#pin-m)"/>
+      <rect x="140" y="190" width="240" height="20" fill="url(#pin-m)"/>
+      <rect x="170" y="40" width="200" height="10" fill="url(#pin-f)"/>
+      <rect x="190" y="170" width="170" height="10" fill="url(#pin-f)"/>
+      <path d="M255 66 L299 110 L255 154 L211 110 Z" fill="none" stroke-dasharray="1.6 2.4" stroke-width="2.4"/>
+      <path d="M255 74 L291 110 L255 146 L219 110 Z"/>
+      <circle cx="255" cy="85" r="2" fill="#111" stroke="none"/>
+      <text x="255" y="114" font-size="9" text-anchor="middle" fill="#111" stroke="none">STM32</text>
+      <rect x="140" y="62" width="22" height="22" rx="2"/><circle cx="151" cy="73" r="6.5"/>
+      <rect x="140" y="128" width="22" height="22" rx="2"/><circle cx="151" cy="139" r="6.5" fill="#111"/>
+      <rect x="178" y="150" width="10" height="6"/>
+      <rect x="318" y="96" width="30" height="13" rx="6.5"/>
+      <text x="333" y="140" font-size="11" text-anchor="middle" fill="#111" stroke="none" letter-spacing="1">NUCLEO</text>
+    </g>
+  </symbol>
+  <!-- STM32 Nucleo, back (mirrored): solder joints, solder bridges, USB on the right -->
+  <symbol id="nucleo-b" viewBox="0 0 400 220">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="2" width="396" height="216" rx="8"/>
+      <path d="M278 4 V216" fill="none" stroke-dasharray="3 4" stroke-width="1"/>
+      <circle cx="16" cy="16" r="5"/><circle cx="16" cy="204" r="5"/><circle cx="384" cy="16" r="5"/><circle cx="384" cy="204" r="5"/>
+      <rect x="374" y="88" width="26" height="44" rx="2"/>
+      <rect x="20" y="10" width="240" height="20" fill="url(#pad)"/>
+      <rect x="20" y="190" width="240" height="20" fill="url(#pad)"/>
+      <rect x="30" y="40" width="200" height="10" fill="url(#pad)"/>
+      <rect x="40" y="170" width="170" height="10" fill="url(#pad)"/>
+      <g stroke-width="1">
+        <rect x="112" y="98" width="5" height="8"/><rect x="119" y="98" width="5" height="8"/>
+        <rect x="136" y="98" width="5" height="8"/><rect x="143" y="98" width="5" height="8"/>
+        <rect x="160" y="98" width="5" height="8"/><rect x="167" y="98" width="5" height="8"/>
+      </g>
+      <g font-size="7" fill="#111" stroke="none" text-anchor="middle"><text x="118" y="116">SB</text><text x="142" y="116">SB</text><text x="166" y="116">SB</text></g>
+      <text x="140" y="152" font-size="13" text-anchor="middle" fill="#111" stroke="none" letter-spacing="2">NUCLEO</text>
+      <rect x="300" y="60" width="30" height="16"/><rect x="316" y="150" width="20" height="12"/><rect x="330" y="100" width="12" height="8"/>
+    </g>
+  </symbol>
+
+  <!-- DHT11: grille on the front, four legs -->
+  <symbol id="dht11-f" viewBox="0 0 120 200">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <path d="M37.5 104 V166 M52.5 104 V166 M67.5 104 V166 M82.5 104 V166" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+      <rect x="20" y="6" width="80" height="100" rx="5"/>
+      <rect x="30" y="20" width="60" height="60" fill="url(#grille)"/>
+      <path d="M30 88 H90" fill="none" stroke-width="1"/>
+      <text x="60" y="100" font-size="9" text-anchor="middle" fill="#111" stroke="none">DHT11</text>
+    </g>
+  </symbol>
+  <symbol id="dht11-b" viewBox="0 0 120 200">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <path d="M37.5 104 V166 M52.5 104 V166 M67.5 104 V166 M82.5 104 V166" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+      <rect x="20" y="6" width="80" height="100" rx="5"/>
+      <rect x="32" y="18" width="56" height="70" rx="2" stroke-width="1"/>
+      <g font-size="8.5" fill="#111" stroke="none">
+        <text transform="translate(85.5 172) rotate(90)">VCC</text>
+        <text transform="translate(70.5 172) rotate(90)">DATA</text>
+        <text transform="translate(55.5 172) rotate(90)">NC</text>
+        <text transform="translate(40.5 172) rotate(90)">GND</text>
+      </g>
+    </g>
+  </symbol>
+
+  <!-- MQ2 module: the sensor under its mesh; comparator and potentiometer on the back -->
+  <symbol id="mq2-f" viewBox="0 0 200 120">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="4" y="8" width="192" height="104" rx="4"/>
+      <circle cx="18" cy="22" r="5"/><circle cx="18" cy="98" r="5"/>
+      <circle cx="86" cy="60" r="46"/>
+      <circle cx="86" cy="60" r="40" fill="none" stroke-width="1"/>
+      <circle cx="86" cy="60" r="34" fill="url(#mesh)"/>
+      <rect x="170" y="40" width="10" height="40" fill="url(#pin-m)"/>
+    </g>
+  </symbol>
+  <symbol id="mq2-b" viewBox="0 0 200 120">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="4" y="8" width="192" height="104" rx="4"/>
+      <circle cx="182" cy="22" r="5"/><circle cx="182" cy="98" r="5"/>
+      <rect x="20" y="40" width="10" height="40" fill="url(#pad)"/>
+      <g font-size="8" fill="#111" stroke="none"><text x="35" y="48">VCC</text><text x="35" y="58">GND</text><text x="35" y="68">DO</text><text x="35" y="78">AO</text></g>
+      <path d="M96 28 V24 M104 28 V24 M112 28 V24 M120 28 V24 M96 50 V54 M104 50 V54 M112 50 V54 M120 50 V54" fill="none" stroke-width="1"/>
+      <rect x="92" y="28" width="34" height="22" rx="1"/>
+      <text x="109" y="42" font-size="6.5" text-anchor="middle" fill="#111" stroke="none">LM393</text>
+      <rect x="120" y="66" width="30" height="30" rx="2"/><circle cx="135" cy="81" r="10"/>
+      <path d="M129 81 H141 M135 75 V87" fill="none" stroke-width="1.2"/>
+      <rect x="70" y="72" width="8" height="5"/><rect x="70" y="88" width="8" height="5"/>
+      <g font-size="6.5" fill="#111" stroke="none"><text x="82" y="77">PWR</text><text x="82" y="93">DO</text></g>
+      <rect x="160" y="30" width="12" height="6"/><rect x="160" y="44" width="12" height="6"/><rect x="160" y="84" width="12" height="6"/>
+    </g>
+  </symbol>
+
+  <!-- BMP180 board: the metal sensor with its air hole, a regulator, four pads -->
+  <symbol id="bmp180-f" viewBox="0 0 140 110">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="4" y="4" width="132" height="102" rx="4"/>
+      <circle cx="20" cy="20" r="7"/>
+      <rect x="54" y="26" width="32" height="32" rx="2"/>
+      <circle cx="78" cy="34" r="2.6"/>
+      <path d="M101 40 V44 M107 40 V44 M113 40 V44 M107 30 V26" fill="none" stroke-width="1"/>
+      <rect x="98" y="30" width="18" height="10"/>
+      <rect x="34" y="58" width="10" height="6"/><rect x="98" y="54" width="10" height="6"/>
+      <rect x="50" y="80" width="40" height="10" fill="url(#pad)"/>
+    </g>
+  </symbol>
+  <symbol id="bmp180-b" viewBox="0 0 140 110">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="4" y="4" width="132" height="102" rx="4"/>
+      <circle cx="120" cy="20" r="7"/>
+      <text x="60" y="30" font-size="9" text-anchor="middle" fill="#111" stroke="none">GY-68</text>
+      <rect x="50" y="80" width="40" height="10" fill="url(#pad)"/>
+      <g font-size="7" fill="#111" stroke="none">
+        <text transform="translate(57.5 76) rotate(-90)">SDA</text>
+        <text transform="translate(67.5 76) rotate(-90)">SCL</text>
+        <text transform="translate(77.5 76) rotate(-90)">GND</text>
+        <text transform="translate(87.5 76) rotate(-90)">VIN</text>
+      </g>
+    </g>
+  </symbol>
+
+  <!-- TFT module: the screen shows what the station displays -->
+  <symbol id="tft-f" viewBox="0 0 260 180">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="2" width="256" height="176" rx="4"/>
+      <rect x="10" y="40" width="10" height="100" fill="url(#pin-m)"/>
+      <rect x="32" y="12" width="216" height="156" rx="2"/>
+      <rect x="40" y="20" width="200" height="140" stroke-width="1"/>
+      <g font-size="10" fill="#111" stroke="none"><text x="52" y="51">TEMP.</text><text x="52" y="81">HUM.</text><text x="52" y="111">GAZ</text><text x="52" y="141">PRESSION</text></g>
+      <path d="M150 47 H222 M150 77 H222 M150 107 H222 M150 137 H222" fill="none" stroke-dasharray="4 4" stroke-width="1.2"/>
+    </g>
+  </symbol>
+  <symbol id="tft-b" viewBox="0 0 260 180">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="2" width="256" height="176" rx="4"/>
+      <rect x="240" y="40" width="10" height="100" fill="url(#pad)"/>
+      <rect x="56" y="60" width="44" height="60" stroke-width="1"/>
+      <path d="M62 60 V120 M70 60 V120 M78 60 V120 M86 60 V120 M94 60 V120" fill="none" stroke-width=".6"/>
+      <rect x="150" y="30" width="24" height="14"/><rect x="150" y="56" width="10" height="6"/><rect x="190" y="56" width="10" height="6"/>
+      <text x="150" y="140" font-size="11" text-anchor="middle" fill="#111" stroke="none" letter-spacing="1">ILI9341</text>
+      <text x="150" y="156" font-size="8" text-anchor="middle" fill="#111" stroke="none">TFT 240×320</text>
+    </g>
+  </symbol>
+
+  <!-- HC-05: printed antenna, Bluetooth chip, six pins -->
+  <symbol id="hc05-f" viewBox="0 0 100 190">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="4" width="96" height="182" rx="4"/>
+      <rect x="10" y="10" width="80" height="130" rx="2"/>
+      <path d="M18 20 H82 V28 H18 V36 H82 V44 H18" fill="none" stroke-width="1.2"/>
+      <rect x="29" y="66" width="42" height="42"/>
+      <text x="50" y="90" font-size="7" text-anchor="middle" fill="#111" stroke="none">BC417</text>
+      <circle cx="24" cy="152" r="3.5"/>
+      <rect x="20" y="170" width="60" height="10" fill="url(#pin-m)"/>
+    </g>
+  </symbol>
+  <symbol id="hc05-b" viewBox="0 0 100 190">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="2" y="4" width="96" height="182" rx="4"/>
+      <g font-size="7.5" fill="#111" stroke="none" text-anchor="middle"><text x="50" y="36">NIVEAU 3,3 V</text><text x="50" y="50">ALIM. 3,6–6 V</text></g>
+      <rect x="30" y="76" width="22" height="12"/><rect x="60" y="78" width="10" height="6"/>
+      <rect x="20" y="170" width="60" height="10" fill="url(#pad)"/>
+      <g font-size="7" fill="#111" stroke="none">
+        <text transform="translate(27.5 164) rotate(-90)">STATE</text>
+        <text transform="translate(37.5 164) rotate(-90)">RXD</text>
+        <text transform="translate(47.5 164) rotate(-90)">TXD</text>
+        <text transform="translate(57.5 164) rotate(-90)">GND</text>
+        <text transform="translate(67.5 164) rotate(-90)">VCC</text>
+        <text transform="translate(77.5 164) rotate(-90)">EN</text>
+      </g>
+    </g>
+  </symbol>
+
+  <!-- Smartphone -->
+  <symbol id="phone-f" viewBox="0 0 90 170">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round" font-family="IBM Plex Mono, monospace">
+      <rect x="4" y="4" width="82" height="162" rx="12"/>
+      <rect x="10" y="22" width="70" height="128" rx="2" stroke-width="1"/>
+      <path d="M38 13 H52" fill="none" stroke-linecap="round"/>
+      <g font-size="7" fill="#111" stroke="none"><text x="16" y="56">TEMP.</text><text x="16" y="76">HUM.</text><text x="16" y="96">GAZ</text><text x="16" y="116">PRESS.</text></g>
+      <path d="M50 54 H72 M50 74 H72 M50 94 H72 M50 114 H72" fill="none" stroke-dasharray="3 3" stroke-width="1"/>
+    </g>
+  </symbol>
+  <symbol id="phone-b" viewBox="0 0 90 170">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round">
+      <rect x="4" y="4" width="82" height="162" rx="12"/>
+      <rect x="54" y="14" width="24" height="36" rx="6"/>
+      <circle cx="66" cy="24" r="5"/><circle cx="66" cy="40" r="5"/>
+    </g>
+  </symbol>
+
+  <!-- Enclosure: principle sketch only (the real model was made in Blender) -->
+  <symbol id="boitier-f" viewBox="0 0 280 200">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M30 100 L80 70 L250 70 L200 100 Z"/>
+      <path d="M200 100 L250 70 L250 160 L200 190 Z"/>
+      <rect x="30" y="100" width="170" height="90"/>
+      <rect x="48" y="114" width="80" height="58" stroke-width="1"/>
+    </g>
+  </symbol>
+  <symbol id="boitier-b" viewBox="0 0 280 200">
+    <g fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round">
+      <path d="M30 34 L80 4 L250 4 L200 34 Z"/>
+      <path d="M30 34 V42 H200 V34 M200 42 L250 12 V4" fill="none"/>
+      <path d="M140 50 V74" fill="none" stroke-dasharray="3 3" stroke-width="1"/>
+      <path d="M30 100 L80 70 L250 70 L200 100 Z"/>
+      <path d="M62 94 L88 78 L196 78 L170 94 Z" stroke-width="1"/>
+      <path d="M200 100 L250 70 L250 160 L200 190 Z"/>
+      <rect x="30" y="100" width="170" height="90"/>
+    </g>
+  </symbol>
+</svg>
+
+<div class="wrap">
+  <header class="top">
+    <span class="mark">C. KAGNASSI — PORTFOLIO</span>
+    <nav aria-label="Sections">
+      <a href="#projets">Projets</a>
+      <a href="#competences">Compétences</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Élève-ingénieur ESEO · option Cloud, Systèmes et Sécurité</div>
+        <h1>Cheickné Kagnassi</h1>
+        <p class="lead">Je cherche une alternance en cybersécurité à partir de septembre 2027. Je conçois des réseaux découpés en zones et surveillés, et je travaille aussi sur les systèmes, l'embarqué et les données. Chaque projet est présenté comme une planche : touchez les pièces pour les voir de près.</p>
+        <dl class="specs">
+          <dt>Recherche</dt><dd>Alternance en cybersécurité, à partir de septembre 2027</dd>
+          <dt>Formation</dt><dd>ESEO, Angers : diplôme d'ingénieur, depuis 2025</dd>
+          <dt>Langues</dt><dd>Français ; anglais (B1), pratiqué chaque jour en stage</dd>
+          <dt>Contact</dt>
+          <dd class="mail"><span id="email">cheickne.kagnassi@reseau.eseo.fr</span><button class="btn" id="copy-email" type="button">Copier</button></dd>
+        </dl>
+      </div>
+      <div class="photo"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBAUEBAYFBQUGBgYHCQ4JCQgICRINDQoOFRIWFhUSFBQXGiEcFxgfGRQUHScdHyIjJSUlFhwpLCgkKyEkJST/2wBDAQYGBgkICREJCREkGBQYJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCQkJCT/wAARCAEsASwDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD6pooooAKZNMkC7nP4etMublbdcnlj0FZuJb2X1/kKaRpCF9XsLNcS3b7QDjsoqzBYpEPMnIyBk+gqK/v9O8NafJfX9wkMSDLOx5PsPU14B8Qfi/qPimR7LTGey0vOMqcPN7k9qrfYc6ttInoPjz42afoXmWGhhL+9HBk/5ZRn6+orwnW9d1PxHete6pdNczHoSMYHpVIDk+/J96cFppWOdu4wJTgtSKtPCUxEQQ04J7Uy6uBagFhgHqfSsXWvE9tFbOkMo3MMDBobsOxtSzxQqS0igjtmsGfxpZ2xkjc/vF4FcNfazcySeWsrYAyDms/zTK/mM3z98jrUcw0i1q2py6jdvOGY5JwCOlUW3NGNrck84pT8mWY4aleQEDJG484HTFIY2OEucs25D6etKoiiOMkue9J5gXCnofSoZf3y71OAtAFzfHtJUdeCKgk64xlT6U2OaPyhj79LuO0cD2IoANhLDnGO39KdJGVcMRkDGR2FNaRRjuf600SEncTnPUelAFlZvLOV+X0J70yS5ZiOcEc59aY+1l+Rs5HemCCQjNAzY0XUms7+J0k2lmGW9BXq1s/nQLIT94da8T3NEw4wUrtdB8abVjhuCQijHTrTixM7pl4pm2s/RvENvrMkkUa7GToD3FaxSrIK5SrWlatf6Fepe6bctbXCHh1GajK0xloA948BfHG01Qx6f4iVLO6OFFwP9W/ux7E16bLaRXSCaBlO4ZBByG96+N2Xj1ruvAPxX1TwhKltdu17pZPzRuctH7g/0qWuxcZuLPoSKaWzkwRx3U1pwTpOuVP1HpWZpGsaX4s01L3T7hZomHUH5kPoR2pGSWylznHv2NLc6NKnqbFFQWt2twvow6ip6kxaadmFFFFAgqG6uVt09WPQU64nWCMsevYetZaJJezEk/U+lNI0pwvq9gjjkvZSSfqfSq/ijxVpXgjSWu72QA4xHED80relN8W+LNN8D6O13dMC+CIoR96Vq+ZfFPinUfF+qPqGoSkkn93GD8sa+gqtxVKl9EWvGnjnVPG9+Z72Qx2qH9zbKflUep9T71zwWlVaeFqjAaq1IF9qULTwKAEC09VpQtUI9WQalJZshVkXdmgDO8Xalb2liYnb943QA15ZcTSSu8jEdcYrrvG+sW11dAW0QaVB1PauFnnklcyEAZOcCobLRYOHXeRknoB1pdoDZByccjNRBiqBxwxqKQlmHJOPSpGSC4KOW4YHgbuaRvmBZeh/SkVBhsjjrmpUVPLKscc5FAiAja3IOO1LHKQQAuQasPErcqxzjkd6roC2cLx/KgYBF3nPUcjilIBICkgZ45p6ruTeQcrwKckZXc5RQuPxFMCPZk7mHy/ypjqSxxwv86stI1wBCAMDnNO2xlRhDkelAiEAR7WOMDoKckwIL54HWkZCDyoIP+cUySPywCTgkZNIZO5kbCoFywzk0iAxkA5B6mq7S4OCeO5oebeQFJI9+1AG54e1EW2pJIspj55YntXrFlfW99brLDIrAivDtwyo+6R39a2NL125syqK/lg9OeoqouwmrnrqOkoJQ5ApGWsbRdZt2svNJwuQD7mt1dsiB16MM1ZDRCVphGKnZaYy0Aa3hLxhqngzUVvNOlOwn97AT8kg+nr719J+D/GmleOtLE9qwWVRiWBj80Zr5TZa0PD/AIh1Dwxqceo6dM0cqHlc8OPQ0mrjTsfVc0MlnIGUnHZqv2l0LhcHhx1Fc94I8bad470gTRFUuEGJ4D1Q+o9q0popLOUFTx2NTudSaqKz3Neioba4W4TI4YdRU1SYtW0ZjyPJeTjA69B6Umu63YeENFm1C9kCRxjv1duwFW1MOl2cl3dOsaRqXkduigV81fErx5P421g+WxXTbYlYI+zerH1q99C6s+i2Mnxb4svvGGryaheO20kiKLtGvYY9ax1WlVeakVao5xAuKcEp4WpFWgBgSnhakVOelPCUAMCVxHjlrnTLpbyB8RuMOfSu2u45jbSCAgS7flJrx3xdqF2b57WefzMHkZ4JqZMaMS4unkuGdzkMeT61GQuSdwGeh9ad5RyTJnp27VAxweORUFgzuScdfSpog64J5Pbihdr4cjGB270/zTvC549xQIduj2ydckDOahKHZkc5pyS4L4xg+tKswbJ6BhjHpQMj+aMgsMfSrHmBCNuAW7+lIimZ0VAWxxVtdJuXRnRO3pSckhqLexSZFySfuikDsxK4GP6elXYNJvJ8R+W5I6sRV+DwpPImNzDHJIFS6iKVOTMKRmjIccAjGBTVbcC7kkdq2Ljw/PH8h3ewx1rNmtJoS6tGwI9qammJwa3I0mwoPPX8KJyr9Tk0mQEAPFRRyKh+6T9aokQRNI2AOBwTU3klMlQAPWlEwAAA29z71G0xUkY4PQUAR/MMgcg1JCArAtuz2oCFlLAex9qXeqD1xQB2/hy5EscNoI/M55C+tejpHtjUYxgCvIPCV/8AZ9WiUPgE8Z4r2VMvGpPUjNXEmRAyVGUPerRWmlKokqlKjZatMlRMtAFvw54iv/CuqxalYSFXQ/OnaRe4NfUXhfxJp/jbQ47+0YYYYkT+KJ/Q18mstdL4A8a3PgjWlulLNZykLcRDoy+oHrSaKi7H0mPMsp/p+orVilWVA6ng1RguLXXNOhvbORZY5U3xupzkelVNzp8uSMdqnc6rKor9Ty343+PfOkPhjT5jtXDXbqe/ZPpXjyp2xT5ZpbmZp55Gklc5Z2PJpQKtKxxtgqVIq0qrxUirQAipUqrQFqVVoARVp4WnBeKeFoAguHWKCRmwAFJya8K8SxL/AG9MQp2k55Neq+OtdTS9LwgV/MO057V47e3EtxIZnJYHue1TJlJDVYuxDq2D6HpUEkD53DA7VI8hIDJnPemmbeQQSD/M1BQiv5SBcE+tNL7wAQSR3p/zt8oB+Y/nW5pmiCTa0uBu/hFTKajuXCm5OyMqz0qe8J2Jx/Ot208GtJhpSVH90d637HTo4AAi4962baAZAXnFcc67ex3U8LH7RRsPDNrCiqkQ46nHJrYi0uDZ8sQAq3bWpdck7R/OtWC1j2/KMn+dZXk9zq5Yx2Rnw2ETIFEKjPHAqQaesQIWJQD2xW7BaBUDYwf5UksOckKMfSnysV0cfe2KMSWiGR6VlXeixzJlQAxHcda7W8tdw6D8KyZrYAk+lQ7plWUtzzq/8JIwOzI55rCu9Eltc4ywHOPSvULi3AJHrWPeWyHqoJraFeS0ZzVMNF7Hmrhgx+Uhqao59SK6PVtJckyRoB3xWGSEPzAcHkV2QmpI8+cHF2ZGzkLjJ45NNB3tkDGafkzuWAG1etPUFSCAMdcdqsgfY3DWdykgALKcgGvXvB3iIayjxsyhkAG0nmvHndZJA6rzmu38BaZ9ouhdxSMkikcA8GmmJo9PKUhUelT7TgZ60wrWhBXZKidatFajdaAKjrURX0q0y1Eye1AHp/wT8e/2Vejw7qEpFrcN/o7seEf+7+Ne5S2MUzlzwT6V8dqXidZI2ZHUgqw6qfWvoDwb8X9Jn8O2n9tXIhvkXy3X1xwD+NS11RcZNbHgKrUirzSomKlVaogFSpkShFqZEoARUp4SnBakVaAGhKJAwjbaOcHH1qYLSTDEZPsaAPDfF9zcT3EkdxuWQMdyHoPeuYEu5dpxgda6TxxHdxak8lyoAckqR6VyoOH3AHnrWb3NA81lYhTx71ZhiVhkjOfTsKhjCHIAyT1FW4IGcgE4HakBf0qxE0wbZwvrXUWybB0FZ2lQbY8k4PYeta8Q7EVw1pXZ6NCFo3LsAwAePetO2TJyprNgJIxitKzBAwTyT+Vc51xN2xi3fK2QOhIratbTHAzk8cVQ0zZ5WOrZ5963rUKBxyT+laxIlcsW1kowOTgc068tl2jKD3q3ZshXgjPrS3EsZDA8npmtdDK+pzdzalwcDNYt7AY8nbmumuGUhgOCO9YGpsVYjI6cn1rKVjaNznLzbk5yKyrhN468A1o3bFmI6ms2VyvWsi2Zd9ENvQYrldUtSsrEKCGH5V190u7Pp2rK1C2Tyy5GDjrXRRlZnHiIXRyLYhXavGRyKSPcVPPX1qzdxx/dU5PUmqLEL0ziu484uR4gPDKRXefDGSea7aJE/cdSfevNyxGCDXpHwkk2yyjcRz19acdwPURHtXBOTTSnNWCvtTStaGZWK1Gy1ZZKjZeelAFV05qIrVplqJ1oAqutRFRnpVlxUe2gCdFqVF9qESpkSgBUWplWmquKlVM0AKop6rSqnFSqtADQtDx7hwKlVKeEoA8g+KukC2SK68z5n48vHSvL3crwDXt/xJt7mezlkZImgQYXI5BrxCcgyHjb6is5blomt1wDk8nvWpaRM+ABnNZ0O04HNbGnqzHMY2npWc3ZGlON2bthvVV3KFXpWmgzzWbaoQBuxgVqQoHPf2rz5PU9SCsrE0XGByT6Vp2pbIwpH9apQws7jitmytSegOamxqmaNg0q8heO4zW5ZzurjqBVbT7I54TJ65NbMWmuBkkDPPFUvIPUejBZGkz94AYz0pJrnjofc1MNP2jJBYetNe0IGAWw36U9QsjIurlmyOgHWsDU7klzgF29q6i6sCFyVB9qw9SsinIABPak0M5a48wgsMdfyqlMBnJatPUYfLYgZBxzjvWM5wSDnHbNTYXMQTYDHAzWbfbXQocnPYVoysFGcc1mXL7t2BjPFVDcyqbHN3VusLnnjtWbcOGUAADHtWrergkNyO1ZcuOo6j1r0YO6PKmrMhTk88+1dd4GuLuC+VYAwRmCuccDNcnbRvNOsaAlieBXu/w/8N21jpQmdVkeTBIx0NXFXIeh1cMOyFBu3fKOaClWFjCrtUYAprJWhBWZaiZetWilMZKAKbrULirrx1A6UAU3WoyvNWnTioSnNAFtFzUypzQiVMqUAIqZqZEpUSplWgBqpUipTlWpFWgBgSn7OKeE9qeEoAyNb0K31rT3tJ1JVumOx9a8F8c+C7jw1dlmcSQsflNfSYjz2ryL41RXaSQ7IWa3IOXxwDSkNM8og5ZVLV0WnRYQGuftmIcDI9+K6izQCNfTFctU6qG5fgTLBRW9aWyZAZhn0rlZNUMBZIRlvWlttQupXbLMpHc965nTudiqWPQrW3tlIYuPoa3rAWgdNsibe+D0ryxbiaJd/nu2e2elSWutTQORvcHqD2qXQ8ylivI940+G3ZcK6g56VoKqKwUdR6149p3im4lgEby7WAyGB611eh+IbmWMGY/KP4iazl7pvB87ud35QPOSPYUwRo7/AE/Wsb+2VwGGSW96cdaZRlHAPpioVRGvsjQuLaMBt3y5FYOovZR7tzj5eDms/X/EN1sOxsNXG3+pNOWBkPONwJrWLUkYzbgzbvzZyM2HGT0BrEutPiC5XGfauavbzEhjjLvzyd3SoJdUvraPEcruvdCOn41fseqZi8T0aNa7tNo46msS4Xkg8Uz+1bkOs43BehDU1r9LtyyrtbuKahYh1EzI1BCOQBgd6xJWP3cYroNS/wBU3auflUscA9eK66WxxVdyxps8dvch2ByPukdjXsngXXb27gWHYGGOWHRawfAHw3t9QEd5eguowQp4Br1bTfDtjo0DQ2UIiVjk9ya3ijBssxfPErHqRzQUqZYgi7V4FIy1ZJXKcVEy1aIqJ1pAVWWomSrTrUTCgCm6VCU5q24NQlTmgC0i1Oi0xFqdBQAqr7VKqUKtSKtACqtSqntQi1Iq4oAAvtTwtKFzUqrQBHsrI8U6fYXekynUsCBOST61vBK5T4ns0fhG42nDeYuKUnZXKirtI+fdbtIbXVnFv/qXfKcY4rbt0/cj1xTNQWO/s4pNoEsR5qSEFhheTXDOd1c7YU+WViSxtIlYlwCfetqFbQDLqmcdcVgS+bFwAc1l3l9cCdY2Zzu4Cr/WsORye5086gtjttmmuNgZST2XmszUEt4MlXKjP8aEVi6lZa34djtL9UWMTnCtH2+taFrDr3iDV7XSlt3Yzrk/aMH8cjtWypaXuYSr62sNhvgpA4IznINdJp+t7AqM5C+xrGvPCtzp9w9pJEYbtOdg+649qZp9rN5m1gQQeQe1ZVIrc3pSaZ6JaakskQKsce5pJ9aWEHnmq+jaRJPECD27VV1zSpbdDyA3eseVWOnmkZ+qeIA6sGb8a5q51Zp3IVcj16UmpQSpJtyxz2FSQ+HrmaaOARS3E7Dd5MQ6D3raENDmq1HcdZ2fn8741z/tCtW3s7aMHLI5+uawbbxEultd2/8AZtkr25KlJ1JZj7YrPTVZtTt5LsWskMaHBaDoDWsqTsYwrRTOkvrW3KsNowa5+5gW3lDL+NNg1CdzgyeamOoPP40rO87HI496yjFxeprKcZbIp6qR9lZuorL0uza/vYYwPl3DJPStbUAWtWT+IkCrENsmn2SxqMytyTXSp8qOSVPnke9eF9LNjpFrGRyF5xWwy1l+Brh7zwrYSSuWl2EMT1rcaOuyLukzkkrOxUK0wrVpo6YUpiKpX2qNlq00dRslAFR1qFlq264qFloAputRFeatstQleaLAWUWp1WmotTotIBUWpVWhF7YqZEoAFSpFSnKvtUqp7UAMCVIqU8JUgSgBipXH/EyFpNDVcZXdzXbBa5H4lSmLQVjX70kqqKzq/AzWj8aPDr5BbygKcB+CKt6TGGbkVa1/TzFHvCE7MZbHSodHIzmvNTvA9Nq1Q34NKt5cM65bsKzr/wAOxPN5gQg9uK6DTYlbDE1tpZRSrhhnPQ1jGbTsdLppq5xsSTyW32C4QzWh6xv0/OtbRE/sWXOl2ogdxtZiSxI/HpXQRaVCrHIBFWzHb2oxHGCxrqi7KzOWUbsxdWif7PHd3T/vo3Doe+a51Y91w0pAy53H8a6bU1LqXnfJ7L6VipGS/SsZzTWhtCm09TsfB0IdfnztHSqPjAKsjbVH1rT8LI7RbR2HaszxOQZGjkHzDoaz5tDfl1OKnQ+ekwQMVOQK6jw9L/YEDXkE87yynczbAQPbNYawhZQpHetqzEtp8uPMhYcr6VtTqJaM5alNvVHP63ptpqt7cX1vM1jJP/rVjQMH9TzVC5SGz0caVp8KxRdXk/ikPqa7eTSrW5XfENpPaqMnh5R3B/CtJzbRnCmr7HnOn+HCspJzg9PatD+xvIBJOTXYPpSxE4ABFZOoIYgaxdRt2NvYqKOMvQEYqw4BzUtnayXMjSyk4K8D0pbyH7Rc+XjO89q2V00Q2yOhIC8HNaylsjGnHVs9T+GIb+w5o2zhHAXNday1keBrVYvDlvIvWUbjW6yV6FJWgjzazTm7FYrmo2SrJWo2XFWZlZlxUTLVtlqJ0pgU3XNQMtXXSoXSmBSdahK81cdahK89KALKLU6LTUFToMipAWNOanRfamoDxUyrQAqipVFNUVMq0ACrT1XNKq1IqUANCVxXxURo9Gt7jBKRTLu9q7sLWf4g0WPXNIuLF1B3qSv+92qZq8Wi4S5ZJniPiW9jm02SNAMyAEe9c5p8pTtirt9btp7XdneFt8RKjPYisuxkB4PfpXm8totHqSnzSTO00q6wi5Gfauv06eKWDGMk9PauJ0iMFASeldbpTKFx3Hcd649pHoRXNEvrGzFiB8p44qaO3CRncQePSrEaqI9vI75FV7yYJwrHBHat07mTilsct4guVNwEUjA7Cq1ojSOufypLqBr3UCqjhTkmtWwtRC4J61jUlZGtOLbOo8Op5CfKp5HNY3ieLzXaTHzV3XhXTI5rPzDyfSuZ8W2ohmYLn6Vm4yUU2aqUXJxPO7piufY9a6DQpvtEYLYOODmsm5sHcPjJPXFSeG5mjdkf7ynpW8NUc07pnSzWZRt8XB64qPeWUO/f9KvxyCVQCSR6Gq1ygRHCkEevpTcnEapp6mRqE6rnnntXJaxcfewa6DUvvfK2cVyernrmogru4VXaNjN01w2rQu+NoJzXR6lLELACM8ysFArkrQB7htxwF5+tdp4J0G78S6tbrOv7mP5mA6Ko7/WuxxvJJHDGfLBnsHha1a08O2MDjDqnP41pMtTCIRqqKOFAUfhTWXNeklZWPKbu7kBSo2SrBFMZaYiqy4qNlqyy1Ey0wKzr7VXdcVbcYqB1FAFV1qApzVpxUJ60AWkFTotMRanQVIDkWplWmqKmRRQAqJUyrQq4qVVoAFWnhaVV4qQLQAgXinhcc0oWnhaAPA/i1bNF4uuB5QRZIQRgfeNefWj+WQCcY619O+LfBFj4wt0inbyLiM/u5wMlc+vrXzh4q0d/DOvXemu5l8l8CTGN49cVy1KbTbOunUTSXY29Ku8pjdwRyK6fT7sKcjjivN9PvSjDBxXSWOpDCktj15rzp09T1adbQ9Et7wqgYSYyOh60/b5wZn6YzXKWWrR87myOxrWh1cOM9R6U7WRSldmWur2tpeT+c6qQ3O7iprjxNp9w6NazxuRwVU1zHjHS5L+7FzbrlW++ucZNYkPhp2bzFieN1/utR7KL1bJ9vOOiR7foHih7e3HlyqB6E1ka/wCIRLMfMcZY9jXmsU2sW37tlcqOjCqt1JqOoblmEiKPTqaXsOjehX1nqlqelPe2SW4csu8jsaytOmjk1KURYyRyRXnBtbi3f5FuGI6Eua7Dwh5tvFJNdKRJJ6npVKko6pk+3c9GjtYbgRgYYgVFdXfyld+Axz9aypdSQscnCjpWXeasr5Bbge9JxuV7SxLf3IBI3dK5TVr0PuFS6lqIOSOSfeufmuDIzEnjvV06ZhWraWJ7Lc8r8nnABr6T+Hvh+HRPDdsUGZrhfMkY9c+leb/Df4T3GrRW2rak4SwJDrGOsncfSvc0iWNFRFCqowAO1ehShZ3Z5dWd1ZEDJTClWWWo2WtzArstRlasstRslMCsy1E61ZYVEwFMCo61A61cdeKgdaAKbrioGXJq3InWq5HNAFxFqdFpiCrCCpAdGvNTotMQVMooAcoqVRSKvFSKtACqKkApFWpFXNACqOKcFpVWnhaAG7f0rwT496GbbxDbalGuIriIIxxwXr6AC1yHxV8M/wDCR+ELhY03XFr++iHfNTNXiVB2Z8xQrtfb+VaEbOMYJ4qgjHvwynB+orRgYSDjOa4JI9CD7GjZ3B7npWtbagqgYauY2yhXIHT0ptlrEduzRXaOj9s9xUuFzRVeVnXz3qMo6HNS2kokkjhUcty1ZNlq1uy5WNCPetmxu081ZVWLOOlSomjnfqaNuIWmMZCvjpiql4lvNA5UKsm/aAvpWnazaazlpEMTnr5feq13NbxE+TDCAf4+9Wok8xzTiJpCDwQOanW6iWMqDimXFxCjkmNc9yO9Y91f20bkh9mQeD0qeQftLGhNcb8kHpWJeTsM7TUFpqRd3GSVz96nkeZuY/hVKNjNzuUZt5XJPWorWze/v7ezjGWnkWIY96luDk4J4FegfBHwq2teJv7TmjzaWI5J6Fj0rWmruxhUel2e76Jpg0nRrGw2gG3hWNseoFXSKlx69aQrXacJAR7U1lqZhTCKAK5Wo2WrLLmo2UUwKzLxUDrVtlqF1pgVWFQOKtOuKgcUAVJFqArz0q04qEjmgC0gqwgzUMYqwgqQJEWpkFMQHNTKKYDlFSqKaq1Mq0gFUelSqtCrxUgFAAq08LSqKeF9qAEC4pSgKkEAgjBB7inhacFoA+XPjB4Wh8JeLD9lG22vVMyJ2T1Fcfb3WyQMDgV6t+0xCU1HR5x/zwK/rXjUUoI3D8a5akdTqpz0OotZkdg3Y9afcW9rPMsV0oMTfdb0NY9nPgZBq+7+fBsY5z0PpWGzOnRmzZeELO5ISG5ki9xWx/wrnXoow1hIlwvqTyK5bSdfl0yQRXGSvQPXpXhbxn5SARzgg9iabbOmkqclZ7nMHwx4ktG2yWUkhbgFRxmo38K+KXjb/RWGf71emp4pmjkSVpUbaSQKo6x4ymSBj5qDcc8Uuc1dGmeVzeE9ZfPnyxxkdcHpWBf6CY3H2i5LjPCD+I11Ov8Ai+PLKj72bqAa5mOeSaf7Tccn+FfSqTe7OSqoXtEnNvFb2yx4AOOgqrcThU2g0+5lz8xNZc0pfNFrmTaQMzzSrGhG52AGa+tfAPhi28LeF7KztwCzxiWR+7EjNfJOj4udbsYx0M6j6819rWSbLG1UdoUH6V00lY5Ksrgy03FTstMK1sYkJFRlasFcVGVoAgYVEwxVll71Cy0wIGFQsKssvFQutMCs4qBxVp1qB1oAqSCocVZkFVz1oAsxirMY7VAgqzGDQBKi1Oi1GlTKKQEiCpkFMUVMi0gHKtSBc0gGalVaABVqRVoUVIBQA0LTgtOAqrqmq2ei2Et9fzLDBEMszH9KAPGP2l4AbfSpO44rwGQNC+5encete9fHS9GveFNJ1hY2jjmlxGrddvvXiMkAfOa5qj946aavEZbzjhwdo75rYtZA67gcisBoWiYgc57VLY37W52sTgnoahxurouM+V2Z0bWq3Axjg9jUa2F1btmB5FA7KaZFqCELk9fStC31eNFwSKyV0b3TKoutXzgTygD1NMmbUbn5JZpMfWtaPVIZBjjNR3F6kkQZQOOtVcLeZiLp+1iSMn1NP8raCSRgVZuLuMKBkGsjUdQCDCMDSSbYpNJEd1d5YopGKzZ7gufLX8TTfMeQswP1qSG3yQa1tY57uRqeEogfEelLjGblBX2tCgWCMeiAV8W+Hk2+INMzwPtK19f2XiKyW+h0a4kEV40QaLccCUY7VtS2ZlV0NQrTStTEUwitTIiZajK1MwphFAELLmoXWrJFROKaAqsMVC4qy61CwpgVnFV3GKtuOarSCgCq4yKgK81YkGDUJ60AWIxVmOoIxVlBQBKg6VOi1EgqxGPakwJY1qZRTEqZBSAcoOKlUU1RUiigByjFPApB0qK9vrbTbZ7q7mSGFBku5x+VAEzukaM8jBUUZZieAK+dvin42l8ba9Do2nSN/Z0Myr8vSVweT7ipfiX8XLrxA0ml6MzW+n5KtIDhpf8ACuf+GmmC88W6cjjIR95BoA9D+O1gLXwPosKJiOMoBjscV4T5Wcmvqf4weH3134cyyRLuksT5+B6CvmJAJUVumRyK5qujOujqihNBuGcc1l3EBTPOB2FdE0atnrVG6tdw6Dis4ysaThcyDcNDgHOVOPrU0d9uY5OAB1pJ4yGIIz74qNbcO+TgVroc/vIcmoOsxwW2jnip21lpF2pwO9VfsTKzEKSPrUa28kWdycdvrRaIc0kWpb52zjp3FVQTI43cg9BT1iKryM7j61LDbAvlaLpDSlJ6jre2Cp8wyf5Vdji4GBxUkEA28irCwYwelZN3N1FIbYjyNQtpR/BIrfrXt3xrtLiLQdA1+1kaK6tUQq68HJrx/RLM6h4g0uwjXcZ7lUP0zX0n8XNHV/CSWJAPkQg4/wB0VvS6nPW3HfDDx5D420RWlYLqFuAs6Z5P+1+NdkQCK+O9A8R6l4V1VNR06UxyD7y54cehr6U+H/xJ03xtYr86W9+oxJAx6n29a2MWjrCKYwqZgc88UxhQIgYVE4qcjFROKYFZhUTirDCoHFMCCQc1WkFWnqu4oAqyCqzdatyCq7LzQBYjFWEFbHi3w8dE1AvEv+iTcoR/CfSshBSTuBOgqzGMCq8eKsxmhgTJUqVEtNutQtdOgM93cRwRryWY0AXVxSySxwIZJZEjQdWc4FeW+KPjhp2nh4NGi+2TDgSH7leUa9478Q+J5Cl3euI2/wCWMZwopAe6eIvi9oGiB47aQ31wvGyPgA/WvFfF3jnWPFdwzXk5SDPywKcKB7isdbcQxBT17k9arygd+fpQMhRTJLkYOK9C+EUBbxlH32x5rgraM7wOR3Oa9M+Dcat4vyRgrF+dCA+itPtobu0msrhQ8MqlWU9wa+Q/H/hibwX4vvtLlUiMuZIm7FTzgfSvr2yOyTiuK+Nvw4TxroI1G1ULqVipdCP417j61lVjfU0pTsz5cGG/Cop4AeQetKEeB2SVSjoSrK3VT6U8EbOPWuRnaZE9vjIFVjFjtzWzLEGqubY59aalYUo3Ka5A681FJ8555NaItiBnAqP7Pzkiq5iORlBYWJ6Vctrfvg+9Si35FW4kC4FJu5ajYWKJVxx+dNuH+UgdKWSTb0OahVWnYKoLMxCgDuTxQNno37P/AIWfxB44W+ljJtLBd5bsJOwr2/4hj7dDep2ED/yq58KvBkfgbwXBC8YW8nQS3Df3ieRVLxEwktNQduvlN/KuulGyOCpK7PlG9tDGzA8Y4zUFne3FhMs9pcSQTIeHQ4IrV1VN5fOcZOKwT8pwetUI9t8C/HZ4YlsvEw3gcLcr/X1r1zSvEela5CJdPvoZgw6bsH8q+QYoxwTt47GtXS7u4s5RLaTyQTDo6NTEfW7g9xioXFeH+Hvi/rel7YtSAvoB1Y/6yvT9B8e6J4ijXyLlYZj/AMsZDhqaEbT9KhccVO3I4/SoXFMCs4qCQVZfrVeSgCrJ3ro9G8BXWr2Ed4ZRD5mcKw5x61W8M6C+u6kqMv8Ao8R3St2PtXq6iKBFiUhVQAAegqJStsOKuUtRsbfXtNeCQD5h8p7o3rXlt7p8+mXj2twpDoevqOxr0y3ma0lwwOP4hUPibQItcs/NiwLmMZRh/F7GknY1q07PQ85Sm3up2elwGe9uY7eMDO5zjNeeeMPi1b+H7qfTLK2kkv4WKOJBt8s/1ryPXfEWq+Ip2l1C6kkJ/gBwo/CruZWPV/E3xutrcSW+hQGeQcGZ+APpXluseItY8QTmbUbyWXceFzgD8KoxQcADoe1W1gRhypOOhpAQLChAU4BHWrVnb55IHHcUgRQAO5NXol2w7R34NAEE28r1PtVSRiRtxznk4q7cbkAVecVWKsTjby1AgtocydRk9Ca734ZT/ZPGlmgbd5o2EiuGUiEhWOW6dK6zwDKsHibTmXk+by1NAz6at2y4retwHjxwfrWDAnKn2zW3ZsCBUsaPl74+eA28M+If7YtIsWGoElsDhZO5PpXl0fvX2/458JWfjHw/c6VdoCsy/K3dWHTH418ZeIfD194W1i40q+RllhcgEjG8eorkqws7nbRndWZngBhzSGPtT0Ut0GKf5eWA/WsTexGEAxkGmeUAxwOKvmH5RnqKimiwOKExuNiltBbmlyORninFT2HNRyLj1q0QQSDJIB4r0r4D+CJPFPi2G9mi3afpx82QkfK7f3a4PStJuNY1CCxtkLzTuEUAc896+z/h14ItvBHh2306FV83aHmkA++3rWlON3cxqysrGtq8iwWpUcADj2FeZ+LJmh0PUJB1MbD9K73xNPtAXPWvOviCxg8I3sg/iwv512RRxNnzveK3lbg2cjmsaWIpg9Sea6SWzcoBuBAHArGmhXkEkbfakMrwkcZJJFXIiVAKg5qtGrbgDj2q6gyM4oAtx/vIt4znvipPmjIdCytjqpwarWswhk8puj9KuYLbsA8DNAHTeHfiTrWhlYpZPtluP4JOw+tel6F8RdF11VQzC2nPVJeBn2rwwqGUbRj61HIriTcDg9QR2piPpd2DAEEEHkEd6S3s5r+5S2gXdJIcAeleJeGPHut6TNFaBZL6ORgiQnliT6GvqvwXoR07To729hEV7OgZ0Jz5Q/u0m7DSuaejaVB4f0xYlwWxl37s1V5pDNIXYnmprq4NzIFTlQcAetW4bCNYx5gy3ep21Z1xSpq73C+tPNXeg+cfrVazuvJby3ztP6VqVRvbLdmSMc9x60k+jJhJNcsjyn43/BSDxlbtr2iRrFrMK5ZF4Fyvp9a+XRp81vcvBPG0M8ZKujjBU1952d4Y8RyH5ex9K85+LvwYtvGEb6zoqJBrCjLAcLcfX3pp20ZlUg4s+Wo7cA5IJFS7TEOORU95YXWl3k1peW8kFzG22SNxgqahkGADjIPWqMihqGpGwlSRoGeI/eYfw+9aFreRXcayQMHU+lQFRIG3qCOmD3rIk0q6srk3WmuVYn5oj0agDdlG85AO0HnmopHx8sR49aWIvNbgSAI+PmHvSOqxsAo7d6AIUZlIB5NdV4Sfy9WtZP7kgrlRgSZPHNdDokuyaIl8EMv86YH1nbLmMH1VT+lX7JsHFZ2lSCexhlHRo1/lV23YK/JwByT6UmBrgBlwa8p+OHw2TxVpB1SwjU6lZruAXrIv92upvvF6y3LWlo21U4aT1PtVaK8uIpi8bs4YYYeoqZQurMuMrO6PkaO1YggjDKcEehFKYD1HWvoTxX8G9O1xnv8ASD/Z98/ztA3+qf6e9eN6tod5pF/LY31u8E8Z5Vh+tefOLienSqRnsYjL8m7GTUTqWjztwK2o7ImPpmobiyIAGMAVknqbuLMVbfP1qG4gOev410MViNnTr3ruPht8In8ZXJ1DUJGg0mBgTjgzew9q1j7zsjCouVXZt/s5/Dt2lbxVqMBAHyWqsO/dvpX0I+ETAFc1JqsGj28NhpUSLBbIEXjjAqWw8WQai5tZAI7jHHo30rvjDlVjzJT5nczdfcz6hHHngcmvP/i3P5HhIwrwZZV4/Gu8n/e6mT6V5r8an22enW5z87McfStFsZs8mbauQw6dKpXlnHMOBgnuKuyEY2cZ7mmZ2rnHTnFIZzs1rLEw+Xkd6sQZZcEgEfrWyYUmXBAPesXVWGnnMcbSsx+VV9aBkd35aI0jvsK87j2rQ0+5F3bxygk8fexjNZtno8t432jUjubqsS/dFbezagUAKoGABQIifOTgdOfrRHHNO6xRoXkc4VVHJPpU8FtPeTxQW0cks0x2JGgyWb0r6N+EPwXTw8seueIYkl1IgNFCwysH196TdhpXIvgr8HF0CKPxDr8QfUZF3QwuMiAEdfrXqt9d+YfKjPy9z60t5ebsxRnjufWlsrLpLIPoKnzZ0wgoLmkPsbTYBK4+Y9B6VdoopN3M5ScndhRRRSJKN5Y7syRjnuPWobW8aE7JMlf1FalUNShRQJAMMTg1SfRm0Jc3uyOR+JHwr0r4g2fnpttdTjH7q5Qfe/2W9vevlzxV4T1XwdqT6fq9s0LjOyTHySj1U96+yrKZ0mVAflbqKZ4o8K6P4s06Sx1eyjuYipIJGGX6HqKd7GdSnys+G0/eSYVcZ4yauRRqnzEZNWtas4dN1fULS3XbFbTtHGCc4GagdRs3dDiqMSmzHzDgc96ZtJO6RuO1LF/rG+lCHcTnmgCERnewyPoe9a+lsqYbqwIOayyfnY1fsOMEd+tAH1h4LuBc+F7CfOd0dO8Q6ibS18iJv30/AA7DvWZ8MnZ/BOmgnop/nVaaRrrxCxlO7BwPamBBbaY+d2Dmti1jkQAciteG2iCj5aWSCNQcLTbAqrdbVCMSPQ1i+K/CFl4ys/LmdI76MHyJx1z6H2NbDKN4GO9Wo4I+u0ZFZuCasUpuLuj5wutLm0q8msrnb5sLFW2niqstt5mMDkH867r4nWsNv4udY0Ch4VZsdzXNwQp9oij2/KzAH868eatNxR79KXNBSZo+D/AM3iCU3Vzm302I/vJMcufRa9diuFhsotPsYhbWMQwqL1PuaW7VbOK2sLdFjt0jXCKMdRUwiSOAlRzjrXq0aKhG/U8avXdSXkZt7J5acDntWDicXS3CZDI2Qa6Mxq4+YZoNrEIWIXtW5zlmAia5juF+7Iufxryv42TRvrGn25YgxKx/OvTdEcvaSAniKTavsK8j+MH73xk6NyqxrgfhSA875LuPXoacykDg5xUU5MchC9AaenLc+maQD1wU544/GowiyJjALA85FSuAszKOgxREoyR70AVXSRT8n3c1o6F4e1PxRqUenaTbyXFw5GcD5UHqx7Cizt45723gcZjllVGHsTX2D4O8IaL4T0yGDSbKOAOgZn6u2QOrdaTdhpXOb+Gnwi0zwJAL262XWqsvzTOMiL1C/wCNdjd3xkykWQvTPc0l/M7SmPPyjsKfpsKPudlyV6UvNnVCCjHmY6zsekko+gq/RRUt3MpScndhRRRSJP/Z" alt="Portrait de Cheickné Kagnassi"></div>
+    </div>
+
+    <ul class="domains" aria-label="Mes domaines">
+      <li>
+        <span class="k">A · Sécurité et réseaux</span>
+        <p>Pare-feu, détection d'intrusion, segmentation en zones, routage Cisco.</p>
+        <a href="#p1">Planche 01</a>
+      </li>
+      <li>
+        <span class="k">B · Embarqué et données</span>
+        <p>C sur STM32, capteurs, Python et apprentissage automatique.</p>
+        <a href="#p2">Planches 02 et 03</a>
+      </li>
+      <li>
+        <span class="k">C · Systèmes et virtualisation</span>
+        <p>Linux, VMware, GNS3, Docker, supervision, téléphonie IP.</p>
+        <a href="#autres">Autres projets</a>
+      </li>
+    </ul>
+
+    <section id="projets" aria-labelledby="h-projets">
+      <div class="sec-head"><span class="no">01</span><h2 id="h-projets">Projets</h2></div>
+      <p class="sec-intro">Chaque planche se monte étape par étape avec « Suivant ». Touchez une pièce du dessin, ou son nom dans la liste, pour lire son rôle.</p>
+
+      <!-- Sheet 01: network security lab -->
+      <article class="case" aria-labelledby="p1">
+        <div class="case-head">
+          <span class="where">Planche 01 · Lab de sécurité réseau · machines virtuelles</span>
+          <h3 id="p1">Architecture réseau sécurisée avec pfSense et Suricata</h3>
+          <p>Un réseau découpé en quatre zones isolées. Tout ce qui passe d'une zone à l'autre traverse un pare-feu central et est inspecté par un système de détection et de prévention d'intrusion.</p>
+        </div>
+        <figure class="board" data-board="net">
+          <div class="bar">
+            <p class="cap" aria-live="polite"></p>
+            <div class="ctrl">
+              <button class="btn" type="button" data-act="restart">Recommencer</button>
+              <button class="btn" type="button" data-act="prev">← Précédent</button>
+              <button class="btn" type="button" data-act="next">Suivant →</button>
+            </div>
+          </div>
+          <div class="scroll">
+            <svg viewBox="0 0 900 300" role="group" aria-labelledby="d0">
+              <title id="d0">Schéma du lab : la zone WAN est reliée au pare-feu pfSense, qui intègre Suricata, et qui relie trois zones internes, LAN d'administration, DMZ avec le serveur web, et zone de test avec la machine d'attaque</title>
+              <g data-step="1"><path class="br" d="M2,60 V52 H162 V60"/><text class="g" x="82" y="44" text-anchor="middle">Extérieur</text></g>
+              <g data-step="2"><path class="br" d="M246,40 V32 H466 V40"/><text class="g" x="356" y="24" text-anchor="middle">Pare-feu central</text></g>
+              <g data-step="3"><text class="g" x="749" y="12" text-anchor="middle">Zones internes</text></g>
+
+              <g class="part" data-step="1" data-id="wan" tabindex="0" role="button" aria-label="WAN : voir le détail">
+                <rect class="n" x="2" y="110" width="160" height="90"/>
+                <text class="t" x="82" y="140" text-anchor="middle">WAN</text>
+                <text class="s" x="82" y="160" text-anchor="middle">passerelle vers Internet</text>
+                <text class="m" x="82" y="182" text-anchor="middle">192.168.100.0/24 · NAT</text>
+              </g>
+
+              <g class="part" data-step="2" data-id="pfsense" tabindex="0" role="button" aria-label="pfSense : voir le détail">
+                <rect class="n" x="246" y="56" width="220" height="188"/>
+                <rect class="n2" x="251" y="61" width="210" height="178"/>
+                <rect class="pin" x="240" y="151" width="6" height="8"/>
+                <rect class="pin" x="466" y="106" width="6" height="8"/><rect class="pin" x="466" y="151" width="6" height="8"/><rect class="pin" x="466" y="196" width="6" height="8"/>
+                <text class="t" x="356" y="90" text-anchor="middle">pfSense</text>
+                <text class="s" x="356" y="110" text-anchor="middle">routage entre les zones</text>
+                <text class="s" x="356" y="126" text-anchor="middle">règles de filtrage (ACL)</text>
+              </g>
+              <g class="part" data-step="6" data-id="suricata" tabindex="0" role="button" aria-label="Suricata : voir le détail">
+                <rect class="band" x="266" y="148" width="180" height="78"/>
+                <text class="t" x="356" y="174" text-anchor="middle">Suricata</text>
+                <text class="s" x="356" y="194" text-anchor="middle">IDS : détecte · IPS : bloque</text>
+                <text class="s" x="356" y="210" text-anchor="middle">inspection des couches 2 à 7</text>
+              </g>
+
+              <g class="part" data-step="3" data-id="lan" tabindex="0" role="button" aria-label="LAN d'administration : voir le détail">
+                <rect class="n mine" x="600" y="20" width="298" height="72"/>
+                <text class="t" x="616" y="46">LAN · zone de confiance</text>
+                <text class="s" x="616" y="66">Poste d'administration</text>
+                <text class="m" x="616" y="82">192.168.2.0/24</text>
+              </g>
+              <g class="part" data-step="4" data-id="dmz" tabindex="0" role="button" aria-label="DMZ : voir le détail">
+                <rect class="n" x="600" y="114" width="298" height="72"/>
+                <rect class="hatch" x="600" y="114" width="14" height="72"/>
+                <text class="t" x="626" y="140">DMZ · zone exposée</text>
+                <text class="s" x="626" y="160">Serveur web, isolé du LAN</text>
+                <text class="m" x="626" y="176">192.168.3.0/24</text>
+              </g>
+              <g class="part" data-step="5" data-id="test" tabindex="0" role="button" aria-label="Zone de test : voir le détail">
+                <rect class="n threat" x="600" y="208" width="298" height="72"/>
+                <text class="t" x="616" y="234">Test · menace simulée</text>
+                <text class="s" x="616" y="254">Machine d'attaque pour éprouver les défenses</text>
+                <text class="m" x="616" y="270">192.168.4.0/24</text>
+              </g>
+
+              <g data-step="2"><path class="wire" d="M162,155 H240"/><text class="if" x="201" y="147" text-anchor="middle">f0/0</text></g>
+              <g data-step="3"><path class="wire" d="M472,110 H530 V56 H600"/><text class="if" x="566" y="48" text-anchor="middle">f1/0</text></g>
+              <g data-step="4"><path class="wire" d="M472,155 H530 V150 H600"/><text class="if" x="566" y="142" text-anchor="middle">f0/1</text></g>
+              <g data-step="5"><path class="wire" d="M472,200 H530 V244 H600"/><text class="if" x="566" y="236" text-anchor="middle">f0/2</text></g>
+            </svg>
+          </div>
+          <div class="lower">
+            <div class="detail" aria-live="polite"></div>
+            <div class="chips" role="group" aria-label="Pièces de la planche"></div>
+          </div>
+          <div class="foot">
+            <p class="legend">Trait épais : zone de confiance · hachures : zone exposée · tirets : zone d'attaque.</p>
+            <dl class="cartouche">
+              <dt>Projet</dt><dd>Lab de sécurité réseau</dd>
+              <dt>Planche</dt><dd>01</dd>
+              <dt>Étape</dt><dd data-cart="step"></dd>
+              <dt>Pièce</dt><dd data-cart="part">—</dd>
+            </dl>
+          </div>
+        </figure>
+        <div class="cols">
+          <div>
+            <h4>Le besoin</h4>
+            <p>Protéger un réseau d'entreprise : séparer les postes d'administration, le serveur exposé sur Internet et l'extérieur, contrôler chaque flux entre eux et repérer les attaques.</p>
+          </div>
+          <div>
+            <h4>Ce que j'ai fait</h4>
+            <ul>
+              <li>Découpé le réseau en quatre zones isolées : WAN, LAN d'administration, DMZ pour le serveur web, zone de test</li>
+              <li>Placé pfSense au centre comme pare-feu, avec le routage et les règles de filtrage entre les zones</li>
+              <li>Intégré Suricata en détection (IDS) et en blocage (IPS) des menaces, avec une inspection jusqu'à la couche applicative</li>
+              <li>Ajouté une machine d'attaque dans la zone de test pour éprouver les défenses</li>
+              <li>Documenté l'architecture avec des schémas draw.io</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Compétences</h4>
+            <ul class="tags">
+              <li>pfSense</li><li>Suricata</li><li>IDS / IPS</li><li>Pare-feu</li><li>ACL</li><li>DMZ</li><li>Segmentation</li><li>Cisco</li><li>Virtualisation</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sheet 02: KU Leuven internship -->
+      <article class="case" aria-labelledby="p2">
+        <div class="case-head">
+          <span class="where">Planche 02 · Stage R&amp;D · KU Leuven, laboratoire M-Group, Bruges · juil. – nov. 2026</span>
+          <h3 id="p2">Reconnaître une activité avec une semelle instrumentée</h3>
+          <p>Une semelle équipée de capteurs de pression et d'une centrale inertielle doit reconnaître ce que fait la personne qui la porte, avec un modèle assez léger pour un microcontrôleur STM32.</p>
+        </div>
+        <figure class="board" data-board="insole">
+          <div class="bar">
+            <p class="cap" aria-live="polite"></p>
+            <div class="ctrl">
+              <button class="btn" type="button" data-act="restart">Recommencer</button>
+              <button class="btn" type="button" data-act="prev">← Précédent</button>
+              <button class="btn" type="button" data-act="next">Suivant →</button>
+            </div>
+          </div>
+          <div class="scroll">
+            <svg viewBox="0 0 900 200" role="group" aria-labelledby="d1">
+              <title id="d1">Chaîne du projet : semelle, téléphone, contrôle qualité, traitement, modèle, puis STM32</title>
+              <g data-step="1"><path class="br" d="M2,30 V22 H284 V30"/><text class="g" x="143" y="15" text-anchor="middle">Acquisition</text></g>
+              <g data-step="3"><path class="br" d="M310,30 V22 H746 V30"/><text class="g" x="528" y="15" text-anchor="middle">Ma chaîne de traitement · Python</text></g>
+              <g data-step="6"><path class="br" d="M770,30 V22 H898 V30"/><text class="g" x="834" y="15" text-anchor="middle">Embarqué · C</text></g>
+
+              <g class="part" data-step="1" data-id="semelle" tabindex="0" role="button" aria-label="Semelle : voir le détail">
+                <rect class="n mine" x="2" y="42" width="128" height="120"/>
+                <text class="t" x="66" y="76" text-anchor="middle">Semelle</text>
+                <text class="s" x="66" y="100" text-anchor="middle">capteurs</text>
+                <text class="s" x="66" y="116" text-anchor="middle">de pression</text>
+                <text class="s" x="66" y="132" text-anchor="middle">+ centrale inertielle</text>
+              </g>
+              <g class="part" data-step="2" data-id="telephone" tabindex="0" role="button" aria-label="Téléphone : voir le détail">
+                <rect class="n" x="156" y="42" width="128" height="120"/>
+                <text class="t" x="220" y="76" text-anchor="middle">Téléphone</text>
+                <text class="s" x="220" y="100" text-anchor="middle">réception</text>
+                <text class="s" x="220" y="116" text-anchor="middle">des mesures</text>
+                <text class="s" x="220" y="132" text-anchor="middle">en Bluetooth</text>
+              </g>
+              <g class="part" data-step="3" data-id="controle" tabindex="0" role="button" aria-label="Contrôle qualité : voir le détail">
+                <rect class="n mine" x="310" y="42" width="128" height="120"/>
+                <text class="t" x="374" y="76" text-anchor="middle">Contrôle qualité</text>
+                <text class="s" x="374" y="100" text-anchor="middle">trous, pics,</text>
+                <text class="s" x="374" y="116" text-anchor="middle">horodatage,</text>
+                <text class="s" x="374" y="132" text-anchor="middle">saturation</text>
+              </g>
+              <g class="part" data-step="4" data-id="traitement" tabindex="0" role="button" aria-label="Traitement : voir le détail">
+                <rect class="n mine" x="464" y="42" width="128" height="120"/>
+                <text class="t" x="528" y="76" text-anchor="middle">Traitement</text>
+                <text class="s" x="528" y="100" text-anchor="middle">rééchantillonnage,</text>
+                <text class="s" x="528" y="116" text-anchor="middle">fenêtres,</text>
+                <text class="s" x="528" y="132" text-anchor="middle">descripteurs</text>
+              </g>
+              <g class="part" data-step="5" data-id="modele" tabindex="0" role="button" aria-label="Modèle : voir le détail">
+                <rect class="n mine" x="618" y="42" width="128" height="120"/>
+                <text class="t" x="682" y="76" text-anchor="middle">Modèle</text>
+                <text class="s" x="682" y="100" text-anchor="middle">comparé sur des</text>
+                <text class="s" x="682" y="116" text-anchor="middle">personnes jamais</text>
+                <text class="s" x="682" y="132" text-anchor="middle">vues</text>
+              </g>
+              <g class="part" data-step="6" data-id="stm32" tabindex="0" role="button" aria-label="STM32 : voir le détail">
+                <rect class="n next" x="772" y="42" width="126" height="120"/>
+                <text class="t" x="835" y="76" text-anchor="middle">STM32</text>
+                <text class="s" x="835" y="100" text-anchor="middle">prochaine étape :</text>
+                <text class="s" x="835" y="116" text-anchor="middle">le modèle en C</text>
+                <text class="s" x="835" y="132" text-anchor="middle">sur la carte</text>
+              </g>
+
+              <path class="wire" data-step="2" d="M130,102 H154" marker-end="url(#arr)"/>
+              <path class="wire" data-step="3" d="M284,102 H308" marker-end="url(#arr)"/>
+              <path class="wire" data-step="4" d="M438,102 H462" marker-end="url(#arr)"/>
+              <path class="wire" data-step="5" d="M592,102 H616" marker-end="url(#arr)"/>
+              <path class="wire" data-step="6" d="M746,102 H770" marker-end="url(#arr)"/>
+            </svg>
+          </div>
+          <div class="lower">
+            <div class="detail" aria-live="polite"></div>
+            <div class="chips" role="group" aria-label="Pièces de la planche"></div>
+          </div>
+          <div class="foot">
+            <p class="legend">Trait épais : ce que j'ai réalisé · tirets : prochaine étape. Projet confidentiel, présenté sans résultats chiffrés.</p>
+            <dl class="cartouche">
+              <dt>Projet</dt><dd>Stage KU Leuven</dd>
+              <dt>Planche</dt><dd>02</dd>
+              <dt>Étape</dt><dd data-cart="step"></dd>
+              <dt>Pièce</dt><dd data-cart="part">—</dd>
+            </dl>
+          </div>
+        </figure>
+        <div class="cols">
+          <div>
+            <h4>Le besoin</h4>
+            <p>Une même pression sous le pied n'a pas le même sens quand on marche ou quand on est debout. Pour suivre la marche au quotidien, il faut d'abord savoir ce que fait la personne : marche, course, escaliers, position assise ou debout.</p>
+          </div>
+          <div>
+            <h4>Ce que j'ai fait</h4>
+            <ul>
+              <li>Monté les capteurs de pression sur la semelle et écrit le protocole de collecte</li>
+              <li>Construit la chaîne de traitement en Python, avec un contrôle des données brutes de chaque participant avant tout modèle</li>
+              <li>Choisi les réglages par des comparaisons mesurées, par exemple la fréquence d'échantillonnage</li>
+              <li>Comparé plusieurs modèles, testés sur des personnes que le modèle n'avait jamais vues</li>
+              <li>Prochaine étape : implémenter le modèle retenu en C sur le microcontrôleur</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Compétences</h4>
+            <ul class="tags">
+              <li>Python</li><li>pandas</li><li>scikit-learn</li><li>PyTorch</li><li>Traitement du signal</li><li>C</li><li>STM32</li><li>Git</li><li>Anglais</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <!-- Sheet 03: SafeRoom Monitor, with the drawn components -->
+      <article class="case" aria-labelledby="p3">
+        <div class="case-head">
+          <span class="where">Planche 03 · Projet de systèmes embarqués · ESEO · en binôme</span>
+          <h3 id="p3">SafeRoom Monitor</h3>
+          <p>Une station qui surveille la qualité de l'air d'une pièce, construite autour d'une carte STM32 Nucleo. Chaque composant est dessiné : touchez-le pour le voir en grand, puis retournez la carte pour voir son dos.</p>
+        </div>
+        <figure class="board" data-board="saferoom">
+          <div class="bar">
+            <p class="cap" aria-live="polite"></p>
+            <div class="ctrl">
+              <button class="btn" type="button" data-act="restart">Recommencer</button>
+              <button class="btn" type="button" data-act="prev">← Précédent</button>
+              <button class="btn" type="button" data-act="next">Suivant →</button>
+            </div>
+          </div>
+          <div class="scroll">
+            <svg viewBox="0 0 900 350" role="group" aria-labelledby="d2">
+              <title id="d2">Montage de SafeRoom Monitor : trois capteurs reliés à une carte STM32 Nucleo, qui affiche les mesures sur un écran et les envoie en Bluetooth à un smartphone, le tout dans un boîtier</title>
+              <g class="part" data-step="7" data-id="boitier" tabindex="0" role="button" aria-label="Boîtier : voir le détail">
+                <rect class="encl" x="12" y="12" width="748" height="330" rx="10"/>
+                <text class="encl-l" x="28" y="334">BOÎTIER · MODÉLISÉ SOUS BLENDER</text>
+              </g>
+
+              <g class="part" data-step="2" data-id="dht11" tabindex="0" role="button" aria-label="DHT11 : voir le détail">
+                <rect class="slot" x="30" y="26" width="230" height="88"/>
+                <use href="#dht11-f" x="44" y="31" width="47" height="78"/>
+                <text class="t" x="152" y="62">DHT11</text>
+                <text class="s" x="152" y="82">température,</text>
+                <text class="s" x="152" y="98">humidité</text>
+              </g>
+              <g class="part" data-step="3" data-id="mq2" tabindex="0" role="button" aria-label="MQ2 : voir le détail">
+                <rect class="slot" x="30" y="126" width="230" height="88"/>
+                <use href="#mq2-f" x="40" y="140" width="100" height="60"/>
+                <text class="t" x="152" y="162">MQ2</text>
+                <text class="s" x="152" y="182">gaz, fumée</text>
+              </g>
+              <g class="part" data-step="4" data-id="bmp180" tabindex="0" role="button" aria-label="BMP180 : voir le détail">
+                <rect class="slot" x="30" y="226" width="230" height="88"/>
+                <use href="#bmp180-f" x="44" y="240" width="76" height="60"/>
+                <text class="t" x="152" y="262">BMP180</text>
+                <text class="s" x="152" y="282">pression</text>
+                <text class="s" x="152" y="298">atmosphérique</text>
+              </g>
+
+              <g class="part" data-step="1" data-id="nucleo" tabindex="0" role="button" aria-label="STM32 Nucleo : voir le détail">
+                <rect class="slot" x="318" y="92" width="240" height="160"/>
+                <use href="#nucleo-f" x="328" y="102" width="220" height="121"/>
+                <text class="t" x="438" y="242" text-anchor="middle">STM32 Nucleo</text>
+              </g>
+
+              <g class="part" data-step="5" data-id="tft" tabindex="0" role="button" aria-label="Écran TFT : voir le détail">
+                <rect class="slot" x="600" y="40" width="142" height="120"/>
+                <use href="#tft-f" x="611" y="46" width="120" height="83"/>
+                <text class="t" x="671" y="150" text-anchor="middle">Écran ILI9341</text>
+              </g>
+              <g class="part" data-step="6" data-id="hc05" tabindex="0" role="button" aria-label="Module HC-05 : voir le détail">
+                <rect class="slot" x="600" y="180" width="142" height="130"/>
+                <use href="#hc05-f" x="610" y="190" width="58" height="110"/>
+                <text class="t" x="678" y="236">HC-05</text>
+                <text class="s" x="678" y="256">Bluetooth</text>
+              </g>
+              <g class="part" data-step="6" data-id="phone" tabindex="0" role="button" aria-label="Smartphone : voir le détail">
+                <rect class="slot" x="790" y="180" width="106" height="130"/>
+                <use href="#phone-f" x="818" y="188" width="50" height="94"/>
+                <text class="t" x="843" y="300" text-anchor="middle">Smartphone</text>
+              </g>
+
+              <path class="wire" data-step="2" d="M260,70 H290 V140 H316" marker-end="url(#arr)"/>
+              <path class="wire" data-step="3" d="M260,170 H316" marker-end="url(#arr)"/>
+              <path class="wire" data-step="4" d="M260,270 H290 V200 H316" marker-end="url(#arr)"/>
+              <path class="wire" data-step="5" d="M558,140 H578 V100 H598" marker-end="url(#arr)"/>
+              <path class="wire" data-step="6" d="M558,200 H578 V245 H598" marker-end="url(#arr)"/>
+              <path class="wire radio" data-step="6" d="M742,245 H788" marker-end="url(#arr)"/>
+            </svg>
+          </div>
+          <div class="viewer">
+            <div class="stage-wrap">
+              <div class="stage" title="Touchez pour retourner la carte">
+                <div class="card">
+                  <div class="face front"><span class="side">RECTO</span><svg role="img" aria-label="Dessin du composant, recto"></svg></div>
+                  <div class="face back inactive"><span class="side">VERSO</span><svg role="img" aria-label="Dessin du composant, verso"></svg></div>
+                </div>
+              </div>
+              <div class="vctrl">
+                <button class="btn" type="button" data-act="flip">Retourner la carte</button>
+                <span class="hint">Touchez un numéro pour le détail.</span>
+              </div>
+            </div>
+            <div class="detail" aria-live="polite"></div>
+          </div>
+          <div class="chips" role="group" aria-label="Pièces de la planche"></div>
+          <div class="foot">
+            <p class="legend">Dessins d'illustration, sans échelle. Le pointillé autour du montage représente le boîtier.</p>
+            <dl class="cartouche">
+              <dt>Projet</dt><dd>SafeRoom Monitor</dd>
+              <dt>Planche</dt><dd>03</dd>
+              <dt>Étape</dt><dd data-cart="step"></dd>
+              <dt>Pièce</dt><dd data-cart="part">—</dd>
+              <dt>Vue</dt><dd data-cart="side">Recto</dd>
+            </dl>
+          </div>
+        </figure>
+        <div class="cols">
+          <div>
+            <h4>Le besoin</h4>
+            <p>Savoir si l'air d'une pièce reste sain, en suivant la température, l'humidité, la présence de gaz et la pression, et consulter ces mesures sur place ou à distance.</p>
+          </div>
+          <div>
+            <h4>Ce que j'ai fait</h4>
+            <ul>
+              <li>Lecture des capteurs DHT11, MQ2 et BMP180 sur la carte STM32</li>
+              <li>Affichage sur écran TFT et envoi des mesures en Bluetooth</li>
+              <li>Boîtier modélisé en 3D avec Blender</li>
+              <li>Analyse du cycle de vie selon la méthode de l'ADEME, rapports et soutenance</li>
+            </ul>
+          </div>
+          <div>
+            <h4>Compétences</h4>
+            <ul class="tags">
+              <li>C</li><li>STM32</li><li>Capteurs</li><li>Bluetooth</li><li>Blender</li><li>Analyse du cycle de vie</li><li>Travail en binôme</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+
+      <div class="case" id="autres" style="padding-bottom: 0;">
+        <div class="case-head"><span class="where">Autres projets</span></div>
+        <ul class="others">
+          <li>
+            <span class="where">Réseaux · GNS3 et VMware</span>
+            <div><h3>Lab de téléphonie IP</h3><p>Un routeur Cisco, deux commutateurs et quatre serveurs de téléphonie Yeastar répartis sur deux réseaux, pour assurer la redondance.</p></div>
+            <ul class="tags"><li>GNS3</li><li>VMware</li><li>Cisco IOS</li><li>Téléphonie IP</li><li>Redondance</li></ul>
+          </li>
+          <li>
+            <span class="where">Réseaux · Cisco Packet Tracer</span>
+            <div><h3>Infrastructures réseau</h3><p>Création d'infrastructures réseau avec Cisco Packet Tracer et gestion de machines virtuelles.</p></div>
+            <ul class="tags"><li>Cisco</li><li>Packet Tracer</li><li>Virtualisation</li></ul>
+          </li>
+          <li>
+            <span class="where">Développement logiciel · ESEO</span>
+            <div><h3>FraudPro</h3><p>Application Java de gestion des fraudes, conçue en programmation orientée objet.</p></div>
+            <ul class="tags"><li>Java</li><li>POO</li></ul>
+          </li>
+          <li>
+            <span class="where">Web et données</span>
+            <div><h3>Réseau social</h3><p>Conception et développement d'un réseau social, avec une base de données MySQL.</p></div>
+            <ul class="tags"><li>HTML/CSS</li><li>PHP</li><li>JavaScript</li><li>MySQL</li></ul>
+          </li>
+          <li>
+            <span class="where">Entrepreneuriat · équipe de 5</span>
+            <div><h3>OZION</h3><p>Plateforme de livraison locale pour les producteurs du Maine-et-Loire : business plan, Business Model Canvas, logo et pitch.</p></div>
+            <ul class="tags"><li>Business plan</li><li>Pitch</li><li>Travail en équipe</li></ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="competences" aria-labelledby="h-competences">
+      <div class="sec-head"><span class="no">02</span><h2 id="h-competences">Compétences</h2></div>
+      <p class="sec-intro">Ce que chaque projet principal m'a fait pratiquer, avec les compétences de l'ingénieur définies par l'ESEO.</p>
+      <div class="matrix-wrap">
+        <table class="matrix">
+          <thead>
+            <tr><th scope="col" style="text-align:left">Compétence</th><th scope="col">Lab de sécurité réseau</th><th scope="col">Stage KU Leuven</th><th scope="col">SafeRoom Monitor</th><th scope="col">FraudPro</th></tr>
+          </thead>
+          <tbody>
+            <tr class="grp"><th colspan="5" scope="colgroup">Techniques</th></tr>
+            <tr><th scope="row">Pare-feu et segmentation réseau</th><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Détection d'intrusion (IDS / IPS)</th><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Virtualisation</th><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td><td></td></tr>
+            <tr><th scope="row">Python et analyse de données</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">Apprentissage automatique</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">Traitement du signal</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">C embarqué sur STM32</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">Capteurs et instrumentation</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">Communication Bluetooth</th><td></td><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">Java et programmation orientée objet</th><td></td><td></td><td></td><td><span class="dot"></span><span class="sr">oui</span></td></tr>
+            <tr><th scope="row">Modélisation 3D</th><td></td><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">Analyse du cycle de vie</th><td></td><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">Git</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr class="grp"><th colspan="5" scope="colgroup">Compétences de l'ingénieur (ESEO)</th></tr>
+            <tr><th scope="row">Diagnostiquer</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">Concevoir</th><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td></tr>
+            <tr><th scope="row">Produire</th><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td></tr>
+            <tr><th scope="row">Valider</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">Piloter</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+            <tr><th scope="row">Communiquer</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td></tr>
+            <tr><th scope="row">S'adapter</th><td></td><td><span class="dot"></span><span class="sr">oui</span></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <dl class="more">
+        <dt>Sécurité et réseaux</dt><dd>pfSense, Suricata (IDS / IPS), VLAN, ACL, DMZ, Cisco, Packet Tracer, GNS3, téléphonie IP</dd>
+        <dt>Systèmes</dt><dd>Linux, virtualisation (VMware), Docker, serveur LAMP, supervision avec Zabbix</dd>
+        <dt>Langages</dt><dd>Python, C/C++, Java, VHDL, SQL, PHP, HTML/CSS/JavaScript</dd>
+        <dt>Outils</dt><dd>Git, Jupyter, draw.io, Altium Designer, STM32Cube.AI</dd>
+      </dl>
+    </section>
+
+    <section id="parcours" aria-labelledby="h-parcours">
+      <div class="sec-head"><span class="no">03</span><h2 id="h-parcours">Parcours</h2></div>
+      <div class="path">
+        <div>
+          <h3>Expériences</h3>
+          <ol class="steps">
+            <li><span class="when">juil. – nov. 2026</span><span class="body"><span class="what">Stagiaire R&amp;D, machine learning embarqué</span><span class="at">KU Leuven, laboratoire M-Group, Bruges (Belgique)</span></span></li>
+            <li><span class="when">nov. 2025 – fév. 2026</span><span class="body"><span class="what">Traitement de données de gestion</span><span class="at">Transcom Consulting Group, Normandie</span></span></li>
+            <li><span class="when">mai – juil. 2025</span><span class="body"><span class="what">Stagiaire, scripts Python de traitement de données</span><span class="at">Bureau du Vérificateur Général du Mali, Bamako</span></span></li>
+            <li><span class="when">oct. 2024 – nov. 2025</span><span class="body"><span class="what">Concours de drones : assemblage, câblage, pilotage</span><span class="at">Donilab, Bamako</span></span></li>
+          </ol>
+        </div>
+        <div class="side-col">
+          <div>
+            <h3>Formation</h3>
+            <ol class="steps">
+              <li><span class="when">depuis sept. 2025</span><span class="body"><span class="what">Diplôme d'ingénieur généraliste</span><span class="at">ESEO, Angers ; option Cloud, Systèmes et Sécurité</span></span></li>
+              <li><span class="when">2023 – 2025</span><span class="body"><span class="what">Classe préparatoire</span><span class="at">ITMA, Bamako (Mali)</span></span></li>
+            </ol>
+          </div>
+          <div>
+            <h3>Centres d'intérêt</h3>
+            <p>Football, voyages.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" aria-labelledby="h-contact">
+      <div class="sec-head"><span class="no">04</span><h2 id="h-contact">Contact</h2></div>
+      <div class="contact">
+        <p>Vous proposez une alternance en cybersécurité à partir de septembre 2027 ? Écrivez-moi, je vous réponds rapidement.</p>
+        <div class="mail"><span id="email-2">cheickne.kagnassi@reseau.eseo.fr</span><button class="btn" id="copy-email-2" type="button">Copier l'adresse</button></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>Cheickné Kagnassi</span><span>Mis à jour en octobre 2026</span></footer>
+</div>
+
+<script>
+  // Copy buttons
+  function wireCopy(buttonId, textId, doneLabel) {
+    var button = document.getElementById(buttonId);
+    var text = document.getElementById(textId);
+    if (!button || !text) return;
+    var label = button.textContent;
+    function selectText() {
+      var range = document.createRange();
+      range.selectNodeContents(text);
+      var sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    }
+    button.addEventListener("click", function () {
+      function done(msg) {
+        button.textContent = msg;
+        setTimeout(function () { button.textContent = label; }, 1800);
+      }
+      try {
+        navigator.clipboard.writeText(text.textContent.trim()).then(function () { done(doneLabel); },
+          function () { selectText(); done("Sélectionnée"); });
+      } catch (e) {
+        selectText();
+        done("Sélectionnée");
+      }
+    });
+  }
+  wireCopy("copy-email", "email", "Copiée");
+  wireCopy("copy-email-2", "email-2", "Adresse copiée");
+
+  // The sheets: each step adds pieces; each piece has a short explanation.
+  // For SafeRoom, each piece also has a drawing (sym, size vb) with numbered points on the front and the back.
+  var BOARDS = {
+    net: {
+      steps: [
+        "On part de l'extérieur : la zone WAN, l'accès à Internet.",
+        "On place pfSense au centre : tout le trafic entre les zones passe par lui.",
+        "On ajoute le LAN d'administration, la zone de confiance.",
+        "On ajoute la DMZ : le serveur web exposé, isolé du LAN.",
+        "On ajoute la zone de test, avec une machine d'attaque.",
+        "On active Suricata dans pfSense : chaque flux est inspecté. Le réseau est complet."
+      ],
+      parts: {
+        wan: { t: "WAN", k: "192.168.100.0/24 · interface f0/0", d: "La porte vers Internet. La passerelle traduit les adresses (NAT), si bien que les machines internes ne sont pas visibles de l'extérieur." },
+        pfsense: { t: "pfSense", k: "Pare-feu · 4 interfaces", d: "Le pare-feu central. Il route le trafic entre les quatre zones et ne laisse passer que les flux prévus par les règles de filtrage (ACL)." },
+        lan: { t: "LAN d'administration", k: "192.168.2.0/24 · interface f1/0", d: "La zone de confiance, avec le poste d'administration. C'est la zone la plus protégée du réseau." },
+        dmz: { t: "DMZ", k: "192.168.3.0/24 · interface f0/1", d: "La zone exposée : le serveur web est joignable depuis Internet, mais il est isolé du LAN, pour qu'une attaque contre lui ne donne pas accès à l'administration." },
+        test: { t: "Zone de test", k: "192.168.4.0/24 · interface f0/2", d: "Une machine d'attaque isolée. Elle sert à lancer des attaques vers les autres zones, pour vérifier que pfSense et Suricata les arrêtent." },
+        suricata: { t: "Suricata", k: "IDS · IPS · couches 2 à 7", d: "Le système de détection et de prévention d'intrusion intégré à pfSense. En IDS, il repère les attaques par signatures et par anomalies ; en IPS, il les bloque directement." }
+      }
+    },
+    insole: {
+      steps: [
+        "La semelle : des capteurs de pression et une centrale inertielle mesurent chaque pas.",
+        "Le téléphone reçoit les mesures en Bluetooth et enregistre un fichier par activité.",
+        "Avant tout modèle, je contrôle les données brutes de chaque participant.",
+        "Je prépare les signaux : rééchantillonnage, filtrage, fenêtres, descripteurs.",
+        "Je compare plusieurs modèles, testés sur des personnes qu'ils n'ont jamais vues.",
+        "Prochaine étape : faire tourner le modèle en C sur le microcontrôleur."
+      ],
+      parts: {
+        semelle: { t: "Semelle instrumentée", k: "Pression · accéléromètre · gyroscope", d: "J'ai monté les capteurs de pression sur la semelle. Avec la centrale inertielle, elle décrit l'appui et le mouvement du pied." },
+        telephone: { t: "Téléphone", k: "Bluetooth · un fichier par activité", d: "Il reçoit les mesures pendant l'enregistrement. J'ai écrit le protocole de collecte : l'ordre des activités, leur durée et les contrôles à faire après chaque fichier." },
+        controle: { t: "Contrôle qualité", k: "Avant tout modèle", d: "Pour chaque fichier : débit réel, horodatages en double, trous dans les données, saturation de l'accéléromètre, pics de pression. Une personne dont le matériel change entre les activités est écartée automatiquement." },
+        traitement: { t: "Traitement", k: "Python · pandas · SciPy", d: "Rééchantillonnage à une fréquence choisie par une comparaison mesurée, filtrage, découpage en fenêtres glissantes, puis des descripteurs statistiques pour chaque fenêtre." },
+        modele: { t: "Modèle", k: "scikit-learn · test sur des personnes jamais vues", d: "Plusieurs modèles comparés. Le test se fait toujours sur une personne que le modèle n'a jamais vue, comme pour un vrai nouvel utilisateur." },
+        stm32: { t: "STM32", k: "Prochaine étape · C embarqué", d: "Le modèle retenu sera implémenté en C pour tourner directement sur le microcontrôleur, et ses prédictions seront vérifiées contre celles de Python." }
+      }
+    },
+    saferoom: {
+      initial: "nucleo",
+      steps: [
+        "On commence par la carte STM32 Nucleo, le cerveau de la station.",
+        "On branche le DHT11 : température et humidité.",
+        "On ajoute le MQ2, qui détecte les gaz.",
+        "On ajoute le BMP180 : la pression atmosphérique.",
+        "L'écran TFT affiche les mesures sur place.",
+        "Le module HC-05 envoie les mesures en Bluetooth vers un smartphone.",
+        "Tout est rangé dans le boîtier modélisé sous Blender : la station est complète."
+      ],
+      parts: {
+        nucleo: {
+          t: "STM32 Nucleo", k: "Microcontrôleur STM32 · programme en C", sym: "nucleo", vb: [400, 220],
+          d: "La carte lit tous les capteurs, met l'écran à jour et envoie les mesures en Bluetooth. Tout le programme est écrit en C.",
+          front: { note: "Recto : le côté des composants", spots: [
+            [255, 110, "Microcontrôleur STM32, monté à 45° : il exécute le programme en C de la station."],
+            [76, 108, "ST-LINK : programme et débogue le STM32 depuis le PC, par le câble USB."],
+            [151, 73, "Bouton USER : un bouton libre, lu par le programme."],
+            [151, 139, "Bouton RESET : redémarre le programme."],
+            [260, 20, "Connecteurs ST morpho (au bord) et Arduino (à l'intérieur) : on y branche les capteurs, l'écran et le module Bluetooth."]
+          ] },
+          back: { note: "Verso : le côté des soudures", spots: [
+            [140, 20, "Soudures des broches morpho : chaque broche donne accès à une entrée ou une sortie du STM32."],
+            [142, 102, "Ponts de soudure (SB) : on les ouvre ou on les ferme pour configurer la carte (alimentation, horloge, liaisons)."],
+            [387, 110, "Connecteur USB : alimente la carte et la relie au PC."]
+          ] }
+        },
+        dht11: {
+          t: "DHT11", k: "Température · humidité · une seule ligne de données", sym: "dht11", vb: [120, 200],
+          d: "Capteur de température et d'humidité. La carte l'interroge sur une seule broche.",
+          front: { note: "Recto : la grille", spots: [
+            [60, 50, "Grille d'entrée de l'air : à l'intérieur, un élément sensible à l'humidité et une thermistance pour la température."],
+            [60, 150, "Quatre broches au pas de 2,54 mm."]
+          ] },
+          back: { note: "Verso : vu de dos, la broche 1 est à droite", spots: [
+            [82.5, 122, "VCC : l'alimentation (broche 1)."],
+            [67.5, 146, "DATA : une seule ligne de données ; la carte lit la température et l'humidité avec un protocole à un fil."],
+            [37.5, 122, "GND : la masse. La broche voisine, NC, n'est pas connectée."]
+          ] }
+        },
+        mq2: {
+          t: "MQ2", k: "Gaz et fumée · sorties analogique et tout-ou-rien", sym: "mq2", vb: [200, 120],
+          d: "Module capteur de gaz : il signale la présence de fumée ou de gaz inflammables.",
+          front: { note: "Recto : le capteur", spots: [
+            [86, 60, "Élément sensible chauffé, sous une grille de protection : sa résistance baisse en présence de gaz ou de fumée. Il doit chauffer quelques minutes avant de donner des mesures stables."],
+            [175, 60, "Quatre broches : VCC, GND, DO et AO."]
+          ] },
+          back: { note: "Verso : l'électronique du module", spots: [
+            [109, 39, "Comparateur LM393 : compare la mesure à un seuil et donne la sortie tout-ou-rien DO."],
+            [135, 81, "Potentiomètre : règle ce seuil."],
+            [25, 94, "AO : sortie analogique, une tension qui monte avec la concentration de gaz."]
+          ] }
+        },
+        bmp180: {
+          t: "BMP180", k: "Pression · bus I2C", sym: "bmp180", vb: [140, 110],
+          d: "Capteur de pression atmosphérique, lu par la carte sur le bus I2C.",
+          front: { note: "Recto : le capteur", spots: [
+            [70, 42, "Capteur BMP180 : il mesure la pression atmosphérique, et aussi la température ; le petit trou laisse passer l'air."],
+            [107, 35, "Régulateur : abaisse l'alimentation à la tension du capteur."],
+            [70, 85, "Quatre broches : VIN, GND, SCL, SDA."]
+          ] },
+          back: { note: "Verso : le nom des broches", spots: [
+            [62, 50, "SDA et SCL : le bus I2C. La carte interroge le capteur avec ces deux fils seulement."],
+            [83, 50, "GND et VIN : l'alimentation."]
+          ] }
+        },
+        tft: {
+          t: "Écran TFT ILI9341", k: "Affichage · contrôleur ILI9341", sym: "tft", vb: [260, 180],
+          d: "Écran couleur qui affiche les mesures en direct sur la station.",
+          front: { note: "Recto : la dalle", spots: [
+            [186, 92, "Dalle TFT de 240 × 320 pixels, pilotée par son contrôleur ILI9341 : la station y affiche ses mesures."],
+            [15, 90, "Connecteur : relie l'écran à la carte."]
+          ] },
+          back: { note: "Verso : le circuit du module", spots: [
+            [78, 90, "Nappe de la dalle : le contrôleur ILI9341, intégré à l'écran, reçoit de la carte les pixels à afficher."],
+            [245, 90, "Soudures du connecteur."]
+          ] }
+        },
+        hc05: {
+          t: "Module HC-05", k: "Bluetooth · liaison série UART", sym: "hc05", vb: [100, 190],
+          d: "Module Bluetooth : il reçoit les mesures de la carte par une liaison série et les envoie sans fil.",
+          front: { note: "Recto : le module radio", spots: [
+            [50, 32, "Antenne imprimée sur le circuit, pour la radio Bluetooth à 2,4 GHz."],
+            [60, 100, "Puce Bluetooth BC417."],
+            [24, 152, "LED d'état : indique si le module est appairé."]
+          ] },
+          back: { note: "Verso : le nom des broches", spots: [
+            [42, 128, "RXD et TXD : la liaison série (UART) avec la carte, en croisant les fils : le TXD du module va sur le RX de la carte."],
+            [62, 142, "GND et VCC : alimentation de 3,6 à 6 V ; les signaux restent en 3,3 V."],
+            [82, 128, "EN : à l'allumage, passe le module en mode configuration (commandes AT)."]
+          ] }
+        },
+        phone: {
+          t: "Smartphone", k: "Consultation à distance", sym: "phone", vb: [90, 170],
+          d: "Reçoit les mesures envoyées par le module HC-05, pour les consulter à distance.",
+          front: { note: "Recto : l'écran", spots: [
+            [45, 84, "Les mesures reçues en Bluetooth."]
+          ] },
+          back: { note: "Verso", spots: [] }
+        },
+        boitier: {
+          t: "Boîtier", k: "Blender · schéma de principe", sym: "boitier", vb: [280, 200],
+          d: "Le boîtier a été modélisé en 3D sous Blender pour accueillir la carte, les capteurs et l'écran. Le projet comprend aussi une analyse du cycle de vie selon la méthode de l'ADEME.",
+          front: { note: "Schéma de principe : boîtier fermé", spots: [] },
+          back: { note: "Schéma de principe : vue éclatée", spots: [] }
+        }
+      }
+    }
+  };
+
+  var HINT = "Touchez une pièce du dessin, ou son nom ci-contre, pour voir son rôle. « Recommencer » remonte tout pièce par pièce.";
+  var SVGNS = "http://www.w3.org/2000/svg";
+
+  function svgEl(name, attrs) {
+    var e = document.createElementNS(SVGNS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+
+  document.querySelectorAll("[data-board]").forEach(function (fig) {
+    var data = BOARDS[fig.getAttribute("data-board")];
+    if (!data) return;
+    var n = data.steps.length;
+    var step = n;
+    var selected = null;
+    var side = "front";
+    var spotOn = -1;
+    var layers = fig.querySelectorAll(".scroll [data-step]");
+    var parts = fig.querySelectorAll(".scroll .part");
+    var cap = fig.querySelector(".cap");
+    var detail = fig.querySelector(".detail");
+    var chipsBox = fig.querySelector(".chips");
+    var prev = fig.querySelector('[data-act="prev"]');
+    var next = fig.querySelector('[data-act="next"]');
+    var restart = fig.querySelector('[data-act="restart"]');
+    var cStep = fig.querySelector('[data-cart="step"]');
+    var cPart = fig.querySelector('[data-cart="part"]');
+    var cSide = fig.querySelector('[data-cart="side"]');
+
+    var viewer = fig.querySelector(".viewer");
+    var card = null, faces = {}, faceSvg = {};
+    if (viewer) {
+      card = viewer.querySelector(".card");
+      faces.front = viewer.querySelector(".face.front");
+      faces.back = viewer.querySelector(".face.back");
+      faceSvg.front = faces.front.querySelector("svg");
+      faceSvg.back = faces.back.querySelector("svg");
+    }
+
+    // One chip per piece, in the order of the steps
+    var order = Array.prototype.slice.call(parts).sort(function (a, b) {
+      return (+a.getAttribute("data-step")) - (+b.getAttribute("data-step"));
+    });
+    var lbl = document.createElement("span");
+    lbl.className = "lbl";
+    lbl.textContent = "Pièces";
+    chipsBox.appendChild(lbl);
+    var chips = {};
+    order.forEach(function (g) {
+      var id = g.getAttribute("data-id");
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "chip";
+      b.textContent = data.parts[id].t;
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { select(id); });
+      chipsBox.appendChild(b);
+      chips[id] = b;
+    });
+
+    function drawFaces(info) {
+      ["front", "back"].forEach(function (f) {
+        var svg = faceSvg[f];
+        while (svg.firstChild) svg.removeChild(svg.firstChild);
+        var w = info.vb[0], h = info.vb[1], big = Math.max(w, h), pad = big * 0.05;
+        svg.setAttribute("viewBox", (-pad) + " " + (-pad) + " " + (w + 2 * pad) + " " + (h + 2 * pad));
+        svg.appendChild(svgEl("use", { href: "#" + info.sym + (f === "front" ? "-f" : "-b"), x: 0, y: 0, width: w, height: h }));
+        // spots about 12 px wide on screen, whatever the size of the drawing
+        var box = faceSvg.front.getBoundingClientRect();
+        var scale = box.width && box.height ? Math.min(box.width / (w + 2 * pad), box.height / (h + 2 * pad)) : 0;
+        var r = Math.min(scale ? 12 / scale : big * 0.038, big * 0.06);
+        info[f].spots.forEach(function (s, i) {
+          var g = svgEl("g", { "class": "spot", role: "button", tabindex: "-1", "aria-label": (i + 1) + " : " + s[2] });
+          g.appendChild(svgEl("circle", { cx: s[0], cy: s[1], r: r }));
+          var t = svgEl("text", { x: s[0], y: s[1], "font-size": (r * 1.15).toFixed(2) });
+          t.textContent = String(i + 1);
+          g.appendChild(t);
+          g.addEventListener("click", function (e) { e.stopPropagation(); pickSpot(i); });
+          g.addEventListener("keydown", function (e) {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); e.stopPropagation(); pickSpot(i); }
+          });
+          svg.appendChild(g);
+        });
+      });
+    }
+
+    function showDetail() {
+      detail.textContent = "";
+      if (!selected) {
+        var p = document.createElement("p");
+        p.textContent = HINT;
+        detail.appendChild(p);
+        return;
+      }
+      var info = data.parts[selected];
+      var k = document.createElement("span"); k.className = "dk"; k.textContent = info.k;
+      var h = document.createElement("h4"); h.textContent = info.t;
+      var d = document.createElement("p"); d.textContent = info.d;
+      detail.appendChild(k); detail.appendChild(h); detail.appendChild(d);
+      if (viewer && info.sym) {
+        var face = info[side];
+        var note = document.createElement("p"); note.className = "face-note"; note.textContent = face.note;
+        detail.appendChild(note);
+        if (face.spots.length) {
+          var ol = document.createElement("ol"); ol.className = "spots";
+          face.spots.forEach(function (s, i) {
+            var li = document.createElement("li");
+            var b = document.createElement("button");
+            b.type = "button"; b.className = "spot-item";
+            b.setAttribute("aria-pressed", i === spotOn ? "true" : "false");
+            var num = document.createElement("span"); num.className = "num"; num.textContent = String(i + 1);
+            var txt = document.createElement("span"); txt.textContent = s[2];
+            b.appendChild(num); b.appendChild(txt);
+            b.addEventListener("click", function () { pickSpot(i); });
+            li.appendChild(b); ol.appendChild(li);
+          });
+          detail.appendChild(ol);
+        }
+      }
+    }
+
+    function markSpots() {
+      if (!viewer) return;
+      ["front", "back"].forEach(function (f) {
+        faceSvg[f].querySelectorAll(".spot").forEach(function (g, i) {
+          g.classList.toggle("on", f === side && i === spotOn);
+          g.setAttribute("tabindex", f === side ? "0" : "-1");
+        });
+      });
+      detail.querySelectorAll(".spot-item").forEach(function (b, i) {
+        b.setAttribute("aria-pressed", i === spotOn ? "true" : "false");
+      });
+    }
+
+    function pickSpot(i) {
+      spotOn = spotOn === i ? -1 : i;
+      markSpots();
+    }
+
+    function setSide(s) {
+      side = s;
+      spotOn = -1;
+      card.classList.toggle("turned", side === "back");
+      faces.front.classList.toggle("inactive", side !== "front");
+      faces.back.classList.toggle("inactive", side !== "back");
+      if (cSide) cSide.textContent = side === "front" ? "Recto" : "Verso";
+      showDetail();
+      markSpots();
+    }
+
+    function select(id) {
+      selected = id;
+      parts.forEach(function (g) { g.classList.toggle("sel", g.getAttribute("data-id") === id); });
+      Object.keys(chips).forEach(function (key) { chips[key].setAttribute("aria-pressed", key === id ? "true" : "false"); });
+      if (cPart) cPart.textContent = data.parts[id].t;
+      if (viewer && data.parts[id].sym) {
+        drawFaces(data.parts[id]);
+        card.classList.add("instant");
+        setSide("front");
+        void card.offsetWidth;
+        card.classList.remove("instant");
+      } else {
+        showDetail();
+      }
+    }
+
+    function render() {
+      layers.forEach(function (el) {
+        var s = +el.getAttribute("data-step");
+        el.classList.toggle("ghost", s > step);
+        el.classList.toggle("fresh", s === step && step < n);
+      });
+      order.forEach(function (g) {
+        chips[g.getAttribute("data-id")].classList.toggle("off", +g.getAttribute("data-step") > step);
+      });
+      if (cStep) cStep.textContent = step + " / " + n;
+      cap.textContent = data.steps[step - 1];
+      prev.disabled = step <= 1;
+      next.disabled = step >= n;
+    }
+
+    function goTo(s) {
+      step = Math.max(1, Math.min(n, s));
+      render();
+      var added = order.filter(function (g) { return +g.getAttribute("data-step") === step; })[0];
+      if (added) select(added.getAttribute("data-id"));
+    }
+
+    prev.addEventListener("click", function () { goTo(step - 1); });
+    next.addEventListener("click", function () { goTo(step + 1); });
+    restart.addEventListener("click", function () { goTo(1); });
+    parts.forEach(function (g) {
+      var id = g.getAttribute("data-id");
+      g.addEventListener("click", function () { select(id); });
+      g.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(id); }
+      });
+    });
+    if (viewer) {
+      viewer.querySelector(".stage").addEventListener("click", function () { setSide(side === "front" ? "back" : "front"); });
+      viewer.querySelector('[data-act="flip"]').addEventListener("click", function () { setSide(side === "front" ? "back" : "front"); });
+    }
+
+    render();
+    if (data.initial) select(data.initial); else showDetail();
+  });
+</script>
+</body>
+</html>
